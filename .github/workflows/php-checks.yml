@@ -1,5 +1,5 @@
 on: [push]
-name: PHP Composer check
+name: Run PHP tests
 jobs:
   composer-check:
     runs-on: ubuntu-latest
@@ -19,6 +19,9 @@ jobs:
 
       - name: Run Composer install
         run: composer install --prefer-dist
+
+      - name: Run PHP checks
+        run: composer phpcheck
 
       - name: Run PHPUnit
         run: composer phpunit
