@@ -3,7 +3,7 @@ name: PHP Composer check
 jobs:
   composer-check:
     runs-on: ubuntu-latest
-    stratergy:
+    strategy:
       matrix:
         php-versions: ['7.2', '7.3', '7.4']
     name: PHP ${{ matrix.php-versions }} tests
