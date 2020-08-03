@@ -1,6 +1,6 @@
 # FileGen
 
-[![PHP checks](https://github.com/AngryBytes/filegen/workflows/php-checks/badge.svg)]
+![PHP checks](https://github.com/AngryBytes/filegen/workflows/PHP%20checks/badge.svg)
 
 **Note:** this is a fork of the original project as it appears to be abandoned.
 

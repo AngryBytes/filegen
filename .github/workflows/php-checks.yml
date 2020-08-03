@@ -1,5 +1,5 @@
 on: [push]
-name: Run PHP tests
+name: PHP checks
 jobs:
   composer-check:
     runs-on: ubuntu-latest
