@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0
+## 0.1.1
 
 ### PHP support
 * Dropped support for PHP `7.1`.
@@ -8,6 +8,10 @@
 
 ### 3rd party updates
 * Updated `symfony/filesystem` to version `4.4`.
+
+## 0.1.0
+
+**Note:** Broken release, use `0.1.1` instead.
 
 ## 0.0.5
 
