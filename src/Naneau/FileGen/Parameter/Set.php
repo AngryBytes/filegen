@@ -7,6 +7,8 @@ use \Iterator;
 
 /**
  * A set of parameters
+ *
+ * @phpstan-implements Iterator<Parameter>
  */
 class Set implements Iterator
 {
@@ -14,24 +16,20 @@ class Set implements Iterator
      * Position of the iteration
      *
      * @var int
-     **/
+     */
     private $position = 0;
 
     /**
      * Parameters
      *
      * @var Parameter[]
-     **/
-    private $parameters = array();
+     */
+    private $parameters = [];
 
     /**
      * Add a new parameter
-     *
-     * @param  string $name        name of the parameter
-     * @param  string $description (optional) human readable description
-     * @return Set
-     **/
-    public function add($name, $description = null)
+     */
+    public function add(string $name, ?string $description = null): self
     {
         $this->parameters[] = new Parameter($name, $description);
 
@@ -40,11 +38,8 @@ class Set implements Iterator
 
     /**
      * Is there a parameter with name $name?
-     *
-     * @param  string $name
-     * @return bool
-     **/
-    public function has($name)
+     */
+    public function has(string $name): bool
     {
         foreach ($this as $parameter) {
             if ($parameter->getName() === $name) {
@@ -57,11 +52,8 @@ class Set implements Iterator
 
     /**
      * Get a parameter by name
-     *
-     * @param  string    $name
-     * @return Parameter
-     **/
-    public function get($name)
+     */
+    public function get(string $name): Parameter
     {
         foreach ($this as $parameter) {
             if ($parameter->getName() === $name) {
@@ -77,20 +69,16 @@ class Set implements Iterator
 
     /**
      * Rewind iterator
-     *
-     * @return void
-     **/
-    public function rewind()
+     */
+    public function rewind(): void
     {
         $this->position = 0;
     }
 
     /**
      * Get current parameter
-     *
-     * @return Parameter
-     **/
-    public function current()
+     */
+    public function current(): Parameter
     {
         return $this->parameters[$this->position];
     }
@@ -99,28 +87,24 @@ class Set implements Iterator
      * Get current key
      *
      * @return int
-     **/
-    public function key()
+     */
+    public function key(): int
     {
         return $this->position;
     }
 
     /**
      * Go to next position
-     *
-     * @return void
-     **/
-    public function next()
+     */
+    public function next(): void
     {
         ++$this->position;
     }
 
     /**
      * Is the iterator in a valid position?
-     *
-     * @return bool
-     **/
-    public function valid()
+     */
+    public function valid(): bool
     {
         return isset($this->parameters[$this->position]);
     }

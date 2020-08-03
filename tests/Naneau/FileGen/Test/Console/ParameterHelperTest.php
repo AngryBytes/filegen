@@ -5,12 +5,8 @@ use Naneau\FileGen\Console\Helper\ParameterHelper;
 
 use Naneau\FileGen\Structure;
 
-use Naneau\FileGen\Test\Console\ParameterCommand;
-
 use Symfony\Component\Console\Application;
 
-use Symfony\Component\Console\Helper\QuestionHelper;
-use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
@@ -18,7 +14,7 @@ use Symfony\Component\Console\Tester\CommandTester;
  */
 class ParameterHelperTest extends \PHPUnit\Framework\TestCase
 {
-    public function testExecute()
+    public function testExecute(): void
     {
         $application = new Application();
         $application->getHelperSet()->set(new ParameterHelper, 'filegenParameters');
@@ -39,44 +35,25 @@ class ParameterHelperTest extends \PHPUnit\Framework\TestCase
         $commandTester = new CommandTester($command);
 
         // Set the input stream
-        $helper = $command->getHelper('question');
-        $helper->setInputStream(
-            $this->getInputStream("FooValue\nBarValue\n\n")
-        );
+        $commandTester->setInputs(['FooValue', 'BarValue']);
 
         $commandTester->execute(array(
-            'command' => $command->getName())
-        );
+            'command' => $command->getName()));
 
-        $this->assertEquals(
+        self::assertEquals(
             'foo descriptionbar descriptionbaz description',
             $commandTester->getDisplay()
         );
 
         $received = $command->getReceived();
 
-        $this->assertArrayHasKey('foo', $received);
-        $this->assertEquals('FooValue', $received['foo']);
+        self::assertArrayHasKey('foo', $received);
+        self::assertEquals('FooValue', $received['foo']);
 
-        $this->assertArrayHasKey('bar', $received);
-        $this->assertEquals('BarValue', $received['bar']);
+        self::assertArrayHasKey('bar', $received);
+        self::assertEquals('BarValue', $received['bar']);
 
-        $this->assertArrayHasKey('baz', $received);
-        $this->assertEquals('BazValue', $received['baz']);
-    }
-
-    /**
-     * Get input stream
-     *
-     * @param string $input
-     * @return resource
-     **/
-    protected function getInputStream($input)
-    {
-        $stream = fopen('php://memory', 'r+', false);
-        fputs($stream, $input);
-        rewind($stream);
-
-        return $stream;
+        self::assertArrayHasKey('baz', $received);
+        self::assertEquals('BazValue', $received['baz']);
     }
 }

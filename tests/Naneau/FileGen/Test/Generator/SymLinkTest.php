@@ -2,13 +2,6 @@
 namespace Naneau\FileGen\Test\Generator;
 
 use Naneau\FileGen\Structure;
-use Naneau\FileGen\Directory;
-use Naneau\FileGen\File;
-use Naneau\FileGen\Generator;
-
-use \RecursiveDirectoryIterator;
-use \RecursiveIteratorIterator;
-use \FilesystemIterator;
 
 /**
  * Test symlink generation
@@ -17,10 +10,8 @@ class SymLinkTest extends \Naneau\FileGen\Test\Generator\TestCase
 {
     /**
      * Test simple creation
-     *
-     * @return void
-     **/
-    public function testCreation()
+     */
+    public function testCreation(): void
     {
         $generator = $this->createGenerator();
 
@@ -31,8 +22,8 @@ class SymLinkTest extends \Naneau\FileGen\Test\Generator\TestCase
         $generator->generate($structure);
 
         // See if structure was generated
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/bar'),
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/bar',
             'foo contents'
         );
     }

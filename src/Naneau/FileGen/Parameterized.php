@@ -9,15 +9,14 @@ interface Parameterized
     /**
      * Get the parameters
      *
-     * @return array[string]string
+     * @return string[]
      */
     public function getParameters();
 
     /**
      * Set the parameters
      *
-     * @param  array[string]string $parameters
-     * @return Parameterized
+     * @param string[] $parameters
      */
-    public function setParameters(array $parameters);
+    public function setParameters(array $parameters): self;
 }

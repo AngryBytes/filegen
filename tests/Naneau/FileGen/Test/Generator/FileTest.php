@@ -2,8 +2,6 @@
 namespace Naneau\FileGen\Test\Generator;
 
 use Naneau\FileGen\Structure;
-use Naneau\FileGen\File;
-use Naneau\FileGen\Generator;
 
 /**
  * Test file generation
@@ -12,10 +10,8 @@ class FileTest extends \Naneau\FileGen\Test\Generator\TestCase
 {
     /**
      * Test simple creation
-     *
-     * @return void
-     **/
-    public function testCreation()
+     */
+    public function testCreation(): void
     {
         $structure = new Structure;
         $structure
@@ -27,39 +23,37 @@ class FileTest extends \Naneau\FileGen\Test\Generator\TestCase
         $generator->generate($structure);
 
         // See if structure was generated
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/foo'),
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/foo',
             'foo contents'
         );
 
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/bar'),
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/bar',
             'bar contents'
         );
-        $this->assertEquals(
-            substr(sprintf('%o', fileperms($generator->getRoot() . '/bar')), -4),
-            '0700'
+        self::assertEquals(
+            '0700',
+            substr(sprintf('%o', fileperms($generator->getRoot() . '/bar')), -4)
         );
 
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/baz/bar'),
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/baz/bar',
             'baz/bar contents'
         );
-        $this->assertEquals(
-            substr(sprintf('%o', fileperms($generator->getRoot() . '/baz/bar')), -4),
-            '0775'
+        self::assertEquals(
+            '0775',
+            substr(sprintf('%o', fileperms($generator->getRoot() . '/baz/bar')), -4)
         );
     }
 
     /**
      * Test already exists
-     *
-     * @expectedException Naneau\FileGen\Generator\Exception\NodeExists
-     *
-     * @return void
-     **/
-    public function testAlreadyExists()
+     */
+    public function testAlreadyExists(): void
     {
+        $this->expectException(\Naneau\FileGen\Generator\Exception\NodeExists::class);
+
         $structure = new Structure;
         $structure->file('foo', 'foo');
 

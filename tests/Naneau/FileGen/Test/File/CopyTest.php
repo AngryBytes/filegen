@@ -1,10 +1,9 @@
 <?php
-namespace Naneau\FileGen\Test;
+namespace Naneau\FileGen\Test\File;
 
+use Naneau\FileGen\File\Contents\Exception;
 use Naneau\FileGen\File\Contents\Copy as CopyContents;
 use Naneau\FileGen\Structure;
-use Naneau\FileGen\File;
-use Naneau\FileGen\Generator;
 
 /**
  * Copying of files
@@ -13,10 +12,8 @@ class CopyTest extends \Naneau\FileGen\Test\Generator\TestCase
 {
     /**
      * Test copying
-     *
-     * @return void
-     **/
-    public function testCopy()
+     */
+    public function testCopy(): void
     {
         $generator = $this->createGenerator();
 
@@ -31,24 +28,23 @@ class CopyTest extends \Naneau\FileGen\Test\Generator\TestCase
         $generator->generate($structure);
 
         // See if structure was generated
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/foo'),
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/foo',
             'foo contents'
         );
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/bar'),
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/bar',
             'foo contents'
         );
     }
 
     /**
      * Test copy fail
-     *
-     * @expectedException Naneau\FileGen\File\Contents\Exception
-     * @return void
-     **/
-    public function testNotExists()
+     */
+    public function testNotExists(): void
     {
+        $this->expectException(Exception::class);
+
         $generator = $this->createGenerator();
 
         $structure = new Structure;
@@ -64,12 +60,11 @@ class CopyTest extends \Naneau\FileGen\Test\Generator\TestCase
 
     /**
      * Test copy fail
-     *
-     * @expectedException Naneau\FileGen\File\Contents\Exception
-     * @return void
-     **/
-    public function testNotReadable()
+     */
+    public function testNotReadable(): void
     {
+        $this->expectException(Exception::class);
+
         $generator = $this->createGenerator();
 
         // Create unreadable file

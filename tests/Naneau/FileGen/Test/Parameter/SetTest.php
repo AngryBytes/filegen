@@ -2,40 +2,30 @@
 namespace Naneau\FileGen\Test\Parameter;
 
 use Naneau\FileGen\Parameter\Set as ParameterSet;
-use Naneau\FileGen\Parameter\Parameter;
 
 class SetTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test add/get
-     *
-     * @return void
-     **/
-    public function testGet()
+     */
+    public function testGet(): void
     {
         $set = new ParameterSet;
         $set
             ->add('foo', 'bar')
             ->add('baz', 'qux');
 
-        $this->assertInstanceOf(
-            'Naneau\FileGen\Parameter\Parameter',
-            $set->get('foo')
-        );
-        $this->assertInstanceOf(
-            'Naneau\FileGen\Parameter\Parameter',
-            $set->get('baz')
-        );
+        $set->get('foo');
+        $set->get('baz');
     }
 
     /**
      * Test get of param that's absent
-     *
-     * @expectedException Naneau\FileGen\Exception
-     * @return void
-     **/
-    public function testGetNonExisting()
+     */
+    public function testGetNonExisting(): void
     {
+        $this->expectException(\Naneau\FileGen\Exception::class);
+
         $set = new ParameterSet;
         $set->add('foo', 'bar');
 

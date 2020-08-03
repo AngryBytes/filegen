@@ -1,24 +1,21 @@
 <?php
 namespace Naneau\FileGen\Test\Parameter;
 
-use Naneau\FileGen\Parameter\Set as ParameterSet;
 use Naneau\FileGen\Parameter\Parameter;
 
 class ParameterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test description constructor
-     *
-     * @return void
-     **/
-    public function testConstructDescription()
+     */
+    public function testConstructDescription(): void
     {
         $param = new Parameter('foo', 'bar');
-        $this->assertEquals(
+        self::assertEquals(
             'foo',
             $param->getName()
         );
-        $this->assertEquals(
+        self::assertEquals(
             'bar',
             $param->getDescription()
         );
@@ -26,52 +23,44 @@ class ParameterTest extends \PHPUnit\Framework\TestCase
 
     /**
      * no description given test
-     *
-     * @return void
-     **/
-    public function testConstructWithoutDescription()
+     */
+    public function testConstructWithoutDescription(): void
     {
         $param = new Parameter('foo');
-        $this->assertEquals('foo', $param->getName());
-        $this->assertEquals('foo', $param->getDescription());
+        self::assertEquals('foo', $param->getName());
+        self::assertEquals('foo', $param->getDescription());
     }
 
     /**
      * No default value
-     *
-     * @return void
-     **/
-    public function testNoDefaultValue()
+     */
+    public function testNoDefaultValue(): void
     {
         $param = new Parameter('foo');
-        $this->assertFalse($param->hasDefaultValue());
+        self::assertFalse($param->hasDefaultValue());
     }
 
     /**
      * Default value
-     *
-     * @return void
-     **/
-    public function testDefaultValue()
+     */
+    public function testDefaultValue(): void
     {
         $param = new Parameter('foo');
         $param->setDefaultValue('bar');
 
-        $this->assertTrue($param->hasDefaultValue());
-        $this->assertEquals('bar', $param->getDefaultValue());
+        self::assertTrue($param->hasDefaultValue());
+        self::assertEquals('bar', $param->getDefaultValue());
     }
 
     /**
      * Default value `null`
-     *
-     * @return void
-     **/
-    public function testNullValue()
+     */
+    public function testNullValue(): void
     {
         $param = new Parameter('foo');
         $param->setDefaultValue(null);
 
-        $this->assertTrue($param->hasDefaultValue());
-        $this->assertEquals(null, $param->getDefaultValue());
+        self::assertTrue($param->hasDefaultValue());
+        self::assertEquals(null, $param->getDefaultValue());
     }
 }

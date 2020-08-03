@@ -2,9 +2,6 @@
 namespace Naneau\FileGen\Test\Generator;
 
 use Naneau\FileGen\Structure;
-use Naneau\FileGen\Directory;
-use Naneau\FileGen\File;
-use Naneau\FileGen\Generator;
 
 /**
  * Test directory structure generation
@@ -13,10 +10,8 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
 {
     /**
      * Test simple creation
-     *
-     * @return void
-     **/
-    public function testCreation()
+     */
+    public function testCreation(): void
     {
         $structure = new Structure;
         $structure
@@ -27,16 +22,14 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
         $generator->generate($structure);
 
         // See if structure was generated
-        $this->assertTrue(is_dir($generator->getRoot() . '/foo'));
-        $this->assertTrue(is_dir($generator->getRoot() . '/bar'));
+        self::assertDirectoryExists($generator->getRoot() . '/foo');
+        self::assertDirectoryExists($generator->getRoot() . '/bar');
     }
 
     /**
      * Test permissions
-     *
-     * @return void
-     **/
-    public function testPermissions()
+     */
+    public function testPermissions(): void
     {
         $structure = new Structure;
         $structure
@@ -47,25 +40,23 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
         $generator->generate($structure);
 
         // See if structure was generated
-        $this->assertTrue(is_dir($generator->getRoot() . '/foo'));
-        $this->assertEquals(
-            substr(sprintf('%o', fileperms($generator->getRoot() . '/foo')), -4),
-            '0755'
+        self::assertDirectoryExists($generator->getRoot() . '/foo');
+        self::assertEquals(
+            '0755',
+            substr(sprintf('%o', fileperms($generator->getRoot() . '/foo')), -4)
         );
 
-        $this->assertTrue(is_dir($generator->getRoot() . '/bar'));
-        $this->assertEquals(
-            substr(sprintf('%o', fileperms($generator->getRoot() . '/bar')), -4),
-            '0700'
+        self::assertDirectoryExists($generator->getRoot() . '/bar');
+        self::assertEquals(
+            '0700',
+            substr(sprintf('%o', fileperms($generator->getRoot() . '/bar')), -4)
         );
     }
 
     /**
      * Test Nesting
-     *
-     * @return void
-     **/
-    public function testNesting()
+     */
+    public function testNesting(): void
     {
         $structure = new Structure;
         $structure
@@ -81,19 +72,17 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
         $generator = $this->createGenerator();
         $generator->generate($structure);
 
-        $this->assertTrue(is_dir($generator->getRoot() . '/foo'));
-        $this->assertTrue(is_dir($generator->getRoot() . '/foo/bar'));
-        $this->assertTrue(is_dir($generator->getRoot() . '/foo/bar/baz'));
+        self::assertDirectoryExists($generator->getRoot() . '/foo');
+        self::assertDirectoryExists($generator->getRoot() . '/foo/bar');
+        self::assertDirectoryExists($generator->getRoot() . '/foo/bar/baz');
 
-        $this->assertTrue(is_dir($generator->getRoot() . '/bar/baz/qux'));
+        self::assertDirectoryExists($generator->getRoot() . '/bar/baz/qux');
     }
 
     /**
      * Test a complex structure of directories mixed with files
-     *
-     * @return void
-     **/
-    public function testFile()
+     */
+    public function testFile(): void
     {
         // Note leading/trailing slashes
         $structure = new Structure;
@@ -116,58 +105,56 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
         $generator = $this->createGenerator();
         $generator->generate($structure);
 
-        $this->assertTrue(is_dir($generator->getRoot() . '/foo'));
-        $this->assertEquals(
-            substr(sprintf('%o', fileperms($generator->getRoot() . '/foo')), -4),
-            '0755'
+        self::assertDirectoryExists($generator->getRoot() . '/foo');
+        self::assertEquals(
+            '0755',
+            substr(sprintf('%o', fileperms($generator->getRoot() . '/foo')), -4)
         );
 
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/foo/fileOne'),
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/foo/fileOne',
             'file one'
         );
-        $this->assertEquals(
-            substr(sprintf('%o', fileperms($generator->getRoot() . '/foo/fileOne')), -4),
-            '0775'
+        self::assertEquals(
+            '0775',
+            substr(sprintf('%o', fileperms($generator->getRoot() . '/foo/fileOne')), -4)
         );
 
-        $this->assertTrue(is_dir($generator->getRoot() . '/foo/bar'));
-        $this->assertEquals(
-            substr(sprintf('%o', fileperms($generator->getRoot() . '/foo/bar')), -4),
-            '0700'
+        self::assertDirectoryExists($generator->getRoot() . '/foo/bar');
+        self::assertEquals(
+            '0700',
+            substr(sprintf('%o', fileperms($generator->getRoot() . '/foo/bar')), -4)
         );
 
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/foo/bar/fileTwo'),
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/foo/bar/fileTwo',
             'file two'
         );
-        $this->assertEquals(
-            substr(sprintf('%o', fileperms($generator->getRoot() . '/foo/bar/fileTwo')), -4),
-            '0700'
+        self::assertEquals(
+            '0700',
+            substr(sprintf('%o', fileperms($generator->getRoot() . '/foo/bar/fileTwo')), -4)
         );
 
-        $this->assertTrue(is_dir($generator->getRoot() . '/foo/bar/baz'));
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/foo/bar/baz/fileThree'),
+        self::assertDirectoryExists($generator->getRoot() . '/foo/bar/baz');
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/foo/bar/baz/fileThree',
             'file three'
         );
 
-        $this->assertTrue(is_dir($generator->getRoot() . '/bar/baz/qux'));
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/bar/baz/qux/fileFour'),
+        self::assertDirectoryExists($generator->getRoot() . '/bar/baz/qux');
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/bar/baz/qux/fileFour',
             'file four'
         );
     }
 
     /**
      * Test already exists
-     *
-     * @expectedException Naneau\FileGen\Generator\Exception\NodeExists
-     *
-     * @return void
-     **/
-    public function testAlreadyExists()
+     */
+    public function testAlreadyExists(): void
     {
+        $this->expectException(\Naneau\FileGen\Generator\Exception\NodeExists::class);
+
         $structure = new Structure;
         $structure->directory('foo');
 

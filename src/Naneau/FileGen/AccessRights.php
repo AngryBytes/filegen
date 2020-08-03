@@ -1,8 +1,6 @@
 <?php
 namespace Naneau\FileGen;
 
-use Naneau\FileGen\Node;
-
 /**
  * Describes access rights for a file or directory
  */
@@ -12,17 +10,10 @@ abstract class AccessRights extends Node
      * The mode
      *
      * @var int
-     **/
+     */
     private $mode;
 
-    /**
-     * Constructor
-     *
-     * @param  string $name
-     * @param  int    $mode mode in octal (0XXX)
-     * @return void
-     **/
-    public function __construct($name, $mode = null)
+    public function __construct(string $name, int $mode)
     {
         parent::__construct($name);
 
@@ -31,21 +22,16 @@ abstract class AccessRights extends Node
 
     /**
      * Get the mode (as an int)
-     *
-     * @return int
      */
-    public function getMode()
+    public function getMode(): int
     {
         return $this->mode;
     }
 
     /**
      * Set the mode (as an int)
-     *
-     * @param  int          $mode
-     * @return AccessRights
      */
-    public function setMode($mode)
+    public function setMode(int $mode): self
     {
         $this->mode = $mode;
 
@@ -54,10 +40,8 @@ abstract class AccessRights extends Node
 
     /**
      * Has a mode been set?
-     *
-     * @return bool
-     **/
-    public function hasMode()
+     */
+    public function hasMode(): bool
     {
         return $this->mode !== null;
     }

@@ -4,8 +4,8 @@ namespace Naneau\FileGen\Test\File;
 use Naneau\FileGen\Structure;
 use Naneau\FileGen\File\Contents\Twig as TwigContents;
 
-use \Twig_Loader_Filesystem as TwigFileLoader;
-use \Twig_Environment as TwigEnvironment;
+use Twig\Loader\FilesystemLoader as TwigFileLoader;
+use Twig\Environment as TwigEnvironment;
 
 /**
  * testing twig
@@ -14,10 +14,8 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
 {
     /**
      * Simple render
-     *
-     * @return void
-     **/
-    public function testRender()
+     */
+    public function testRender(): void
     {
         $generator = $this->createGenerator();
 
@@ -29,18 +27,16 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
         $generator->generate($structure);
 
         // See if structure was generated
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/foo'),
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/foo',
             "foo bar baz\n" // Twig generates a newline at EOF...
         );
     }
 
     /**
      * Parameters
-     *
-     * @return void
-     **/
-    public function testRenderParameters()
+     */
+    public function testRenderParameters(): void
     {
         $generator = $this->createGenerator();
 
@@ -57,18 +53,16 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
         $generator->generate($structure);
 
         // See if structure was generated
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/foo'),
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/foo',
             "foo bar baz\n" // Twig generates a newline at EOF...
         );
     }
 
     /**
      * Test parameters through structure
-     *
-     * @return void
-     **/
-    public function testStructureParameters()
+     */
+    public function testStructureParameters(): void
     {
         $structure = new Structure;
         $structure
@@ -84,18 +78,16 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
         $generator->generate($structure);
 
         // See if structure was generated
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/foo'),
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/foo',
             "foo bar baz\n" // Twig generates a newline at EOF...
         );
     }
 
     /**
      * Parameters
-     *
-     * @return void
-     **/
-    public function testMissingParameters()
+     */
+    public function testMissingParameters(): void
     {
         $generator = $this->createGenerator();
 
@@ -111,18 +103,16 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
         $generator->generate($structure);
 
         // See if structure was generated
-        $this->assertEquals(
-            file_get_contents($generator->getRoot() . '/foo'),
+        self::assertStringEqualsFile(
+            $generator->getRoot() . '/foo',
             "foo  baz\n" // Twig generates a newline at EOF...
         );
     }
 
     /**
      * Create a twig environment
-     *
-     * @return TwigEnvironment
-     **/
-    private function createTwig()
+     */
+    private function createTwig(): TwigEnvironment
     {
         return new TwigEnvironment(
             new TwigFileLoader($this->getTestsRoot() .  '/templates/'),

@@ -13,26 +13,18 @@ class Copy implements Contents
      * The source file
      *
      * @var string
-     **/
+     */
     private $from;
 
-    /**
-     * The source file
-     *
-     * @param  string $from
-     * @return void
-     **/
-    public function __construct($from)
+    public function __construct(string $from)
     {
         $this->setFrom($from);
     }
 
     /**
      * Get the contents
-     *
-     * @return string
-     **/
-    public function getContents()
+     */
+    public function getContents(): string
     {
         // Make sure file exists
         if (!file_exists($this->getFrom()) || !is_readable($this->getFrom())) {
@@ -56,21 +48,16 @@ class Copy implements Contents
 
     /**
      * Get the source file
-     *
-     * @return string
      */
-    public function getFrom()
+    public function getFrom(): string
     {
         return $this->from;
     }
 
     /**
      * Set the source file
-     *
-     * @param  string $from
-     * @return Copy
      */
-    public function setFrom($from)
+    public function setFrom(string $from): self
     {
         $this->from = $from;
 
