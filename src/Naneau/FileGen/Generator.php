@@ -92,8 +92,9 @@ class Generator implements Parameterized
      * Set the parameters
      *
      * @param string[] $parameters
+     * @return self
      */
-    public function setParameters(array $parameters): self
+    public function setParameters(array $parameters): Parameterized
     {
         $this->parameters = $parameters;
 
