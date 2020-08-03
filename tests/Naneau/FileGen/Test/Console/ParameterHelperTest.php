@@ -14,7 +14,7 @@ use Symfony\Component\Console\Tester\CommandTester;
  */
 class ParameterHelperTest extends \PHPUnit\Framework\TestCase
 {
-    public function testExecute()
+    public function testExecute(): void
     {
         $application = new Application();
         $application->getHelperSet()->set(new ParameterHelper, 'filegenParameters');
@@ -38,8 +38,7 @@ class ParameterHelperTest extends \PHPUnit\Framework\TestCase
         $commandTester->setInputs(['FooValue', 'BarValue']);
 
         $commandTester->execute(array(
-            'command' => $command->getName())
-        );
+            'command' => $command->getName()));
 
         self::assertEquals(
             'foo descriptionbar descriptionbaz description',

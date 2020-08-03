@@ -10,10 +10,8 @@ class FileTest extends \Naneau\FileGen\Test\Generator\TestCase
 {
     /**
      * Test simple creation
-     *
-     * @return void
-     **/
-    public function testCreation()
+     */
+    public function testCreation(): void
     {
         $structure = new Structure;
         $structure
@@ -51,10 +49,8 @@ class FileTest extends \Naneau\FileGen\Test\Generator\TestCase
 
     /**
      * Test already exists
-     *
-     * @return void
-     **/
-    public function testAlreadyExists()
+     */
+    public function testAlreadyExists(): void
     {
         $this->expectException(\Naneau\FileGen\Generator\Exception\NodeExists::class);
 

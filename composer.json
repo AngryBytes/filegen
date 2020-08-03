@@ -6,8 +6,16 @@
         {
             "name": "Maurice Fonk",
             "email": "npm@naneau.net"
+        },
+        {
+            "name": "Angry Bytes BV",
+            "email": "info@angrybytes.com",
+            "homepage": "https://angrybytes.com/"
         }
     ],
+    "support": {
+        "email": "support@angrybytes.com"
+    },
     "autoload": {
         "psr-4": {
             "Naneau\\FileGen\\": "src/Naneau/FileGen",

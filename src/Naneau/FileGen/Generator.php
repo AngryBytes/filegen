@@ -18,31 +18,29 @@ class Generator implements Parameterized
      * Root of the generation
      *
      * @var string
-     **/
+     */
     private $root;
 
     /**
      * The parameters
      *
-     * @var array[string][string]
-     **/
+     * @var string[]
+     */
     private $parameters;
 
     /**
      * The symfony filesystem
      *
      * @var Filesystem
-     **/
+     */
     private $fileSystem;
 
     /**
      * Constructor
      *
-     * @param  string              $root
-     * @param  array[string]string $parameters
-     * @return void
-     **/
-    public function __construct($root, array $parameters = array())
+     * @param string[] $parameters
+     */
+    public function __construct(string $root, array $parameters = [])
     {
         $this
             ->setRoot($root)
@@ -52,11 +50,8 @@ class Generator implements Parameterized
 
     /**
      * Generate a Structure on disk
-     *
-     * @param  Structure $structure
-     * @return bool
-     **/
-    public function generate(Structure $structure)
+     */
+    public function generate(Structure $structure): bool
     {
         foreach ($structure as $node) {
             $this->createNode($node);
@@ -67,21 +62,16 @@ class Generator implements Parameterized
 
     /**
      * Get the root directory
-     *
-     * @return string
      */
-    public function getRoot()
+    public function getRoot(): string
     {
         return $this->root;
     }
 
     /**
      * Set the root directory
-     *
-     * @param  string    $root
-     * @return Generator
      */
-    public function setRoot($root)
+    public function setRoot(string $root): self
     {
         $this->root = $root;
 
@@ -91,9 +81,9 @@ class Generator implements Parameterized
     /**
      * Get the parameters
      *
-     * @return array[string]string
+     * @return string[]
      */
-    public function getParameters()
+    public function getParameters(): array
     {
         return $this->parameters;
     }
@@ -101,10 +91,9 @@ class Generator implements Parameterized
     /**
      * Set the parameters
      *
-     * @param  array[string]string $parameters
-     * @return Generator
+     * @param string[] $parameters
      */
-    public function setParameters(array $parameters)
+    public function setParameters(array $parameters): self
     {
         $this->parameters = $parameters;
 
@@ -113,21 +102,16 @@ class Generator implements Parameterized
 
     /**
      * Get the file system
-     *
-     * @return Filesystem
      */
-    public function getFilesystem()
+    public function getFilesystem(): Filesystem
     {
         return $this->fileSystem;
     }
 
     /**
      * Set the file system
-     *
-     * @param  Filesystem $fileSystem
-     * @return Generator
      */
-    public function setFilesystem(Filesystem $fileSystem)
+    public function setFilesystem(Filesystem $fileSystem): self
     {
         $this->fileSystem = $fileSystem;
 
@@ -137,10 +121,9 @@ class Generator implements Parameterized
     /**
      * Create a node
      *
-     * @param  Node $node
-     * @return bool
-     **/
-    private function createNode(Node $node)
+     * @param Node $node
+     */
+    private function createNode(Node $node): void
     {
         // See if it exists
         if (file_exists($this->getNodePath($node))) {
@@ -150,24 +133,25 @@ class Generator implements Parameterized
             ));
         }
 
-        if ($node instanceof File) {
-            return $this->createFile($node);
-        } elseif ($node instanceof SymLink) {
-            return $this->createLink($node);
-        } elseif ($node instanceof Directory) {
-            return $this->createDirectory($node);
+        switch (true) {
+            case $node instanceof File:
+                $this->createFile($node);
+                break;
+            case $node instanceof SymLink:
+                $this->createLink($node);
+                break;
+            case $node instanceof Directory:
+                $this->createDirectory($node);
+                break;
+            default:
+                throw new InvalidArgumentException('Invalid node type');
         }
-
-        throw new InvalidArgumentException('Invalid node type');
     }
 
     /**
      * Create a file
-     *
-     * @param  File $file
-     * @return bool
-     **/
-    private function createFile(File $file)
+     */
+    private function createFile(File $file): self
     {
         // Full path to the file
         $fullPath = $this->getNodePath($file);
@@ -196,11 +180,8 @@ class Generator implements Parameterized
 
     /**
      * Create a directory
-     *
-     * @param  Directory $directory
-     * @return Generator
-     **/
-    private function createDirectory(Directory $directory)
+     */
+    private function createDirectory(Directory $directory): self
     {
         $fullPath = $this->getNodePath($directory);
 
@@ -232,11 +213,8 @@ class Generator implements Parameterized
 
     /**
      * Create a symlink
-     *
-     * @param  SymLink   $link
-     * @return Generator
-     **/
-    private function createLink(SymLink $link)
+     */
+    private function createLink(SymLink $link): self
     {
         $fullToPath = $this->getNodePath($link);
         $fullFromPath = $link->getEndpoint();
@@ -272,11 +250,8 @@ class Generator implements Parameterized
      * Get the full path to a node, including the root path
      *
      * @see getRoot()
-     *
-     * @param  Node   $node
-     * @return string
-     **/
-    private function getNodePath(Node $node)
+     */
+    private function getNodePath(Node $node): string
     {
         return $this->getRoot()
             . DIRECTORY_SEPARATOR

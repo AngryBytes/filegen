@@ -1,8 +1,8 @@
 # FileGen
 
-[![Build Status](https://travis-ci.org/naneau/filegen.svg?branch=master)](https://travis-ci.org/naneau/filegen)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/45ba109e-f456-469c-8cf2-fb621fa3c069/mini.png)](https://insight.sensiolabs.com/projects/45ba109e-f456-469c-8cf2-fb621fa3c069)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/naneau/filegen/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/naneau/filegen/?branch=master)
+[![PHP checks](https://github.com/AngryBytes/filegen/workflows/php-checks/badge.svg)]
+
+**Note:** this is a fork of the original project as it appears to be abandoned.
 
 A small tool to aid in the creation of (complicated) file and directory
 

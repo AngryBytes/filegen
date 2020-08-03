@@ -12,10 +12,8 @@ class CopyTest extends \Naneau\FileGen\Test\Generator\TestCase
 {
     /**
      * Test copying
-     *
-     * @return void
-     **/
-    public function testCopy()
+     */
+    public function testCopy(): void
     {
         $generator = $this->createGenerator();
 
@@ -42,10 +40,8 @@ class CopyTest extends \Naneau\FileGen\Test\Generator\TestCase
 
     /**
      * Test copy fail
-     *
-     * @return void
-     **/
-    public function testNotExists()
+     */
+    public function testNotExists(): void
     {
         $this->expectException(Exception::class);
 
@@ -64,10 +60,8 @@ class CopyTest extends \Naneau\FileGen\Test\Generator\TestCase
 
     /**
      * Test copy fail
-     *
-     * @return void
-     **/
-    public function testNotReadable()
+     */
+    public function testNotReadable(): void
     {
         $this->expectException(Exception::class);
 

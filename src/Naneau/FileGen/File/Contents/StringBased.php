@@ -3,8 +3,6 @@ namespace Naneau\FileGen\File\Contents;
 
 use Naneau\FileGen\File\Contents;
 
-use Naneau\FileGen\File\Contents as ContentGenerator;
-
 /**
  * String based file contents
  */
@@ -14,37 +12,26 @@ class StringBased implements Contents
      * Contents of the file
      *
      * @var string
-     **/
+     */
     private $contents;
 
-    /**
-     * Constructor
-     *
-     * @param string $contents
-     * @return void
-     **/
-    public function __construct($contents)
+    public function __construct(string $contents)
     {
         $this->setContents($contents);
     }
 
     /**
      * Get the contents of the file
-     *
-     * @return string
      */
-    public function getContents()
+    public function getContents(): string
     {
         return $this->contents;
     }
 
     /**
      * Set the contents of the file
-     *
-     * @param  ContentGenerator|string $contents
-     * @return self
      */
-    public function setContents($contents)
+    public function setContents(string $contents): self
     {
         $this->contents = $contents;
 

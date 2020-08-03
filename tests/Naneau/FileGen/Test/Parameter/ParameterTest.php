@@ -7,10 +7,8 @@ class ParameterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test description constructor
-     *
-     * @return void
-     **/
-    public function testConstructDescription()
+     */
+    public function testConstructDescription(): void
     {
         $param = new Parameter('foo', 'bar');
         self::assertEquals(
@@ -25,10 +23,8 @@ class ParameterTest extends \PHPUnit\Framework\TestCase
 
     /**
      * no description given test
-     *
-     * @return void
-     **/
-    public function testConstructWithoutDescription()
+     */
+    public function testConstructWithoutDescription(): void
     {
         $param = new Parameter('foo');
         self::assertEquals('foo', $param->getName());
@@ -37,10 +33,8 @@ class ParameterTest extends \PHPUnit\Framework\TestCase
 
     /**
      * No default value
-     *
-     * @return void
-     **/
-    public function testNoDefaultValue()
+     */
+    public function testNoDefaultValue(): void
     {
         $param = new Parameter('foo');
         self::assertFalse($param->hasDefaultValue());
@@ -48,10 +42,8 @@ class ParameterTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Default value
-     *
-     * @return void
-     **/
-    public function testDefaultValue()
+     */
+    public function testDefaultValue(): void
     {
         $param = new Parameter('foo');
         $param->setDefaultValue('bar');
@@ -62,10 +54,8 @@ class ParameterTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Default value `null`
-     *
-     * @return void
-     **/
-    public function testNullValue()
+     */
+    public function testNullValue(): void
     {
         $param = new Parameter('foo');
         $param->setDefaultValue(null);

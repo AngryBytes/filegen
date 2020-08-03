@@ -4,8 +4,6 @@
         backupGlobals="false"
         backupStaticAttributes="false"
         bootstrap="vendor/autoload.php"
-        cacheTokens="false"
-        cacheResult="false"
         colors="true"
         >
 

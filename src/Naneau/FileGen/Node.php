@@ -10,44 +10,33 @@ class Node
      * Name of the node
      *
      * @var string
-     **/
+     */
     private $name;
 
     /**
      * Parent node
      *
      * @var Node
-     **/
+     */
     private $parent;
 
-    /**
-     * Constructor
-     *
-     * @param  string $name
-     * @return void
-     **/
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->setName($name);
     }
 
     /**
      * Get the name of the node
-     *
-     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
      * Set the name of the node
-     *
-     * @param  string $name
-     * @return Node
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -56,11 +45,8 @@ class Node
 
     /**
      * Get the name including that of the parent's
-     *
-     * @param  string $separator
-     * @return string
-     **/
-    public function getFullName($separator = DIRECTORY_SEPARATOR)
+     */
+    public function getFullName(string $separator = DIRECTORY_SEPARATOR): string
     {
         if ($this->hasParent()) {
             return $this->getParent()->getFullName($separator)
@@ -73,21 +59,16 @@ class Node
 
     /**
      * Get the parent node
-     *
-     * @return Node
      */
-    public function getParent()
+    public function getParent(): Node
     {
         return $this->parent;
     }
 
     /**
      * Set the parent node
-     *
-     * @param  Node $parent
-     * @return Node
      */
-    public function setParent(Node $parent)
+    public function setParent(Node $parent): self
     {
         $this->parent = $parent;
 
@@ -96,10 +77,8 @@ class Node
 
     /**
      * Does this node have a parent?
-     *
-     * @return bool
-     **/
-    public function hasParent()
+     */
+    public function hasParent(): bool
     {
         return !empty($this->parent);
     }

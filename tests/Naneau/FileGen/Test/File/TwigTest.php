@@ -14,10 +14,8 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
 {
     /**
      * Simple render
-     *
-     * @return void
-     **/
-    public function testRender()
+     */
+    public function testRender(): void
     {
         $generator = $this->createGenerator();
 
@@ -37,10 +35,8 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
 
     /**
      * Parameters
-     *
-     * @return void
-     **/
-    public function testRenderParameters()
+     */
+    public function testRenderParameters(): void
     {
         $generator = $this->createGenerator();
 
@@ -65,10 +61,8 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
 
     /**
      * Test parameters through structure
-     *
-     * @return void
-     **/
-    public function testStructureParameters()
+     */
+    public function testStructureParameters(): void
     {
         $structure = new Structure;
         $structure
@@ -92,10 +86,8 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
 
     /**
      * Parameters
-     *
-     * @return void
-     **/
-    public function testMissingParameters()
+     */
+    public function testMissingParameters(): void
     {
         $generator = $this->createGenerator();
 
@@ -119,10 +111,8 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
 
     /**
      * Create a twig environment
-     *
-     * @return TwigEnvironment
-     **/
-    private function createTwig()
+     */
+    private function createTwig(): TwigEnvironment
     {
         return new TwigEnvironment(
             new TwigFileLoader($this->getTestsRoot() .  '/templates/'),

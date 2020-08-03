@@ -10,10 +10,8 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
 {
     /**
      * Test simple creation
-     *
-     * @return void
-     **/
-    public function testCreation()
+     */
+    public function testCreation(): void
     {
         $structure = new Structure;
         $structure
@@ -30,10 +28,8 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
 
     /**
      * Test permissions
-     *
-     * @return void
-     **/
-    public function testPermissions()
+     */
+    public function testPermissions(): void
     {
         $structure = new Structure;
         $structure
@@ -59,10 +55,8 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
 
     /**
      * Test Nesting
-     *
-     * @return void
-     **/
-    public function testNesting()
+     */
+    public function testNesting(): void
     {
         $structure = new Structure;
         $structure
@@ -87,10 +81,8 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
 
     /**
      * Test a complex structure of directories mixed with files
-     *
-     * @return void
-     **/
-    public function testFile()
+     */
+    public function testFile(): void
     {
         // Note leading/trailing slashes
         $structure = new Structure;
@@ -158,10 +150,8 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
 
     /**
      * Test already exists
-     *
-     * @return void
-     **/
-    public function testAlreadyExists()
+     */
+    public function testAlreadyExists(): void
     {
         $this->expectException(\Naneau\FileGen\Generator\Exception\NodeExists::class);
 

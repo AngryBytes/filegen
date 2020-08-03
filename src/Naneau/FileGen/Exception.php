@@ -6,4 +6,6 @@ use \Exception as NativeException;
 /**
  * FileGen exception
  */
-class Exception extends NativeException {}
+class Exception extends NativeException
+{
+}

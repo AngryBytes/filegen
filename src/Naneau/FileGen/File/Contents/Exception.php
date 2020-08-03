@@ -6,4 +6,6 @@ use Naneau\FileGen\Exception as FileGenException;
 /**
  * Content generating exception
  */
-class Exception extends FileGenException {}
+class Exception extends FileGenException
+{
+}

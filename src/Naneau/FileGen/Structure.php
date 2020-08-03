@@ -16,19 +16,17 @@ class Structure extends Directory
      * The parameter definition
      *
      * @var ParameterSet
-     **/
+     */
     private $parameterDefinition;
 
     /**
      * Constructor
-     *
-     * @return void
-     **/
-    public function __construct()
+     */
+    public function __construct(int $mode = 0666)
     {
         // Although the root node (Structure) is a directory, it does not  have
         // a "name", relative to the root
-        parent::__construct('');
+        parent::__construct('', $mode);
 
         // Initialize the parameter definition
         $this->setParameterDefinition(new ParameterSet);
@@ -37,17 +35,16 @@ class Structure extends Directory
     /**
      * Add a file
      *
-     * @param  string              $name
-     * @param  FileContents|string $contents
-     * @param  int                 $mode     mode in octal 0XXX
-     * @return Structure
-     **/
-    public function file($name, $contents = '', $mode = null)
+     * @param FileContents|string $contents
+     */
+    public function file(string $name, $contents = '', int $mode = 0666): self
     {
         // Create the file itself
         $file = new File(basename($name), $contents, $mode);
 
         $parent = $this->parentDirectory($name);
+        assert($parent instanceof Directory);
+
         $parent->addChild($file);
 
         return $this;
@@ -55,17 +52,15 @@ class Structure extends Directory
 
     /**
      * Add a directory
-     *
-     * @param  string    $name
-     * @param  int       $mode mode in octal 0XXX
-     * @return Structure
-     **/
-    public function directory($name, $mode = null)
+     */
+    public function directory(string $name, int $mode = 0777): self
     {
         // Create the file itself
         $directory = new Directory(basename($name), $mode);
 
         $parent = $this->parentDirectory($name);
+        assert($parent instanceof Directory);
+
         $parent->addChild($directory);
 
         return $this;
@@ -73,17 +68,15 @@ class Structure extends Directory
 
     /**
      * Create a symlink
-     *
-     * @param  string    $from
-     * @param  string    $to
-     * @return Structure
-     **/
-    public function link($from, $to)
+     */
+    public function link(string $from, string $to): self
     {
         // Create the file itself
         $link = new SymLink($from, basename($to));
 
         $parent = $this->parentDirectory($to);
+        assert($parent instanceof Directory);
+
         $parent->addChild($link);
 
         return $this;
@@ -91,12 +84,8 @@ class Structure extends Directory
 
     /**
      * Add a parameter
-     *
-     * @param  string    $name        name of the parameter
-     * @param  string    $description (optional) human readable description
-     * @return Structure
-     **/
-    public function parameter($name, $description = null)
+     */
+    public function parameter(string $name, string $description = null): self
     {
         $this->getParameterDefinition()->add($name, $description);
 
@@ -105,21 +94,16 @@ class Structure extends Directory
 
     /**
      * Get the parameter definition
-     *
-     * @return ParameterSet
      */
-    public function getParameterDefinition()
+    public function getParameterDefinition(): ParameterSet
     {
         return $this->parameterDefinition;
     }
 
     /**
      * Set the parameter definition
-     *
-     * @param  ParameterSet $parameterDefinition
-     * @return Structure
      */
-    public function setParameterDefinition(ParameterSet $parameterDefinition)
+    public function setParameterDefinition(ParameterSet $parameterDefinition): self
     {
         $this->parameterDefinition = $parameterDefinition;
 
@@ -129,10 +113,9 @@ class Structure extends Directory
     /**
      * Create (and add) a parent directory for a path
      *
-     * @param  string $name
-     * @return void
-     **/
-    private function parentDirectory($name)
+     * @return self|Node
+     */
+    private function parentDirectory(string $name)
     {
         // Parent path
         $parentPath = dirname(trim($name, DIRECTORY_SEPARATOR));
@@ -146,12 +129,8 @@ class Structure extends Directory
         $directories = explode(DIRECTORY_SEPARATOR, $parentPath);
 
         $parent = $this;
-        $dirCount = count($directories);
-        for ($x = 0; $x < $dirCount; $x++) {
-
-            // Going through directories, highest level first
-            $directory = $directories[$x];
-
+        // Going through directories, highest level first
+        foreach ($directories as $directory) {
             if ($parent->hasChild($directory)) {
                 // If the parent already has a child by the name of $directory
 

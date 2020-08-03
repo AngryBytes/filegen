@@ -6,6 +6,7 @@ use Naneau\FileGen\Parameter\Parameter;
 
 use Symfony\Component\Console\Helper\HelperInterface;
 use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Helper\QuestionHelper;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -19,22 +20,19 @@ class ParameterHelper implements HelperInterface
     /**
      * The helperset
      *
-     * @var HelperSet
-     **/
+     * @var HelperSet|null
+     */
     private $helperSet;
 
     /**
      * Ask for a parameter's value
      *
-     * @param  Structure           $structure
-     * @param  InputInterface      $input
-     * @param  OutputInterface     $output
-     * @return array[string]string the parameter set as a key/value hash for use in a generator
-     **/
-    public function askParameters(Structure $structure, InputInterface $input, OutputInterface $output)
+     * @return string[] the parameter set as a key/value hash for use in a generator
+     */
+    public function askParameters(Structure $structure, InputInterface $input, OutputInterface $output): array
     {
-        $parameters = array();
-        foreach($structure->getParameterDefinition() as $parameter) {
+        $parameters = [];
+        foreach ($structure->getParameterDefinition() as $parameter) {
             $parameters[$parameter->getName()] = $this->askParameter(
                 $parameter,
                 $input,
@@ -46,13 +44,8 @@ class ParameterHelper implements HelperInterface
 
     /**
      * Ask for a parameter's value
-     *
-     * @param  Parameter           $parameter
-     * @param  InputInterface      $input
-     * @param  OutputInterface     $output
-     * @return array[string]string the parameter set as a key/value hash for use in a generator
-     **/
-    public function askParameter(Parameter $parameter, InputInterface $input, OutputInterface $output)
+     */
+    public function askParameter(Parameter $parameter, InputInterface $input, OutputInterface $output): string
     {
         if ($parameter->hasDefaultValue()) {
             $question = new Question($parameter->getDescription(), $parameter->getDefaultValue());
@@ -68,38 +61,38 @@ class ParameterHelper implements HelperInterface
      *
      * @param HelperSet $helperSet A HelperSet instance
      */
-    public function setHelperSet(HelperSet $helperSet = null)
+    public function setHelperSet(HelperSet $helperSet = null): void
     {
         $this->helperSet = $helperSet;
     }
 
     /**
      * Gets the helper set associated with this helper.
-     *
-     * @return HelperSet A HelperSet instance
      */
-    public function getHelperSet()
+    public function getHelperSet(): ?HelperSet
     {
         return $this->helperSet;
     }
 
     /**
      * Returns the canonical name of this helper.
-     *
-     * @return string The canonical name
      */
-    public function getName()
+    public function getName(): string
     {
         return 'filegenParameters';
     }
 
     /**
      * Get the question helper
-     *
-     * @return HelperInterface
-     **/
-    private function getQuestionHelper()
+     */
+    private function getQuestionHelper(): QuestionHelper
     {
-        return $this->getHelperSet()->get('question');
+        $helperSet = $this->getHelperSet();
+        assert($helperSet instanceof HelperSet);
+
+        $helper = $helperSet->get('question');
+        assert($helper instanceof QuestionHelper);
+
+        return $helper;
     }
 }

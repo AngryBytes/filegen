@@ -10,21 +10,21 @@ class Parameter
      * Name of the parameter
      *
      * @var string
-     **/
+     */
     private $name;
 
     /**
      * Human readable description
      *
      * @var string
-     **/
+     */
     private $description;
 
     /**
      * The default value
      *
      * @var mixed
-     **/
+     */
     private $defaultValue;
 
     /**
@@ -34,45 +34,32 @@ class Parameter
      * valid default value
      *
      * @var bool
-     **/
+     */
     private $hasDefaultValue = false;
 
     /**
      * Constructor
-     *
-     * @param  string $name        name of the parameter
-     * @param  string $description (optional) human readable description
-     * @return void
-     **/
-    public function __construct($name, $description = null)
+     */
+    public function __construct(string $name, ?string $description = null)
     {
         $this->setName($name);
 
         // Set the description, or use the name as a fallback description if none given
-        if ($description !== null) {
-            $this->setDescription($description);
-        } else {
-            $this->setDescription($name);
-        }
+        $this->setDescription($description ?? $name);
     }
 
     /**
      * Get the name/key of the parameter
-     *
-     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
      * Set the name/key of the parameter
-     *
-     * @param  string    $name
-     * @return Parameter
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -81,21 +68,16 @@ class Parameter
 
     /**
      * Get the description in human readable form
-     *
-     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /**
      * Set the description in human readable form
-     *
-     * @param  string    $description
-     * @return Parameter
      */
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -115,10 +97,9 @@ class Parameter
     /**
      * Set the default value
      *
-     * @param  mixed     $defaultValue
-     * @return Parameter
+     * @param mixed $defaultValue
      */
-    public function setDefaultValue($defaultValue)
+    public function setDefaultValue($defaultValue): self
     {
         $this->setHasDefaultValue(true);
 
@@ -129,21 +110,16 @@ class Parameter
 
     /**
      * Does this parameter have a default value?
-     *
-     * @return bool
-     **/
-    public function hasDefaultValue()
+     */
+    public function hasDefaultValue(): bool
     {
         return $this->hasDefaultValue;
     }
 
     /**
      * Set the default value flag
-     *
-     * @param  bool      $hasDefaultValue
-     * @return Parameter
-     **/
-    private function setHasDefaultValue($hasDefaultValue = true)
+     */
+    private function setHasDefaultValue(bool $hasDefaultValue = true): self
     {
         $this->hasDefaultValue = $hasDefaultValue;
 

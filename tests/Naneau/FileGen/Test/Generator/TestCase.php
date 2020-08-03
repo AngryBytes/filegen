@@ -21,9 +21,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
 
     /**
      * Set Up test
-     *
-     * @return void
-     **/
+     */
     public function setUp(): void
     {
         $dir = sys_get_temp_dir() . '/naneau-file-gen-tests';
@@ -43,21 +41,16 @@ class TestCase extends \PHPUnit\Framework\TestCase
 
     /**
      * Get the creation root
-     *
-     * @return string
      */
-    public function getRootDir()
+    public function getRootDir(): string
     {
         return $this->rootDir;
     }
 
     /**
      * Set the creation root
-     *
-     * @param  string   $rootDir
-     * @return TestCase
      */
-    public function setRootDir($rootDir)
+    public function setRootDir(string $rootDir): self
     {
         $this->rootDir = $rootDir;
 
@@ -67,31 +60,29 @@ class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * Create a new generator
      *
-     * @param  array[string]string $parameters
+     * @param  string[] $parameters
      * @return Generator
-     **/
-    protected function createGenerator(array $parameters = array())
+     */
+    protected function createGenerator(array $parameters = []): Generator
     {
         return new Generator($this->getRootDir(), $parameters);
     }
 
     /**
      * Get the tests directory root path
-     *
-     * @return string
-     **/
-    protected function getTestsRoot()
+     */
+    protected function getTestsRoot(): string
     {
-        return realpath(__DIR__ . '/../../../../');
+        $path = realpath(__DIR__ . '/../../../../');
+        assert($path !== false);
+
+        return $path;
     }
 
     /**
      * Delete a directory
-     *
-     * @param  string $dir
-     * @return void
-     **/
-    private static function deleteDir($dir)
+     */
+    private static function deleteDir(string $dir): void
     {
         $iterator = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS),

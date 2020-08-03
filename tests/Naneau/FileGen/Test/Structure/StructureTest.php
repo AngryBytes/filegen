@@ -5,17 +5,13 @@ use Naneau\FileGen\Structure;
 use Naneau\FileGen\Directory;
 use Naneau\FileGen\File;
 use Naneau\FileGen\SymLink;
-use Naneau\FileGen\Parameter\Parameter;
 
 /**
  * Test structure generation
  */
 class StructureTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @return void
-     **/
-    public function testStructure()
+    public function testStructure(): void
     {
         // Note leading slashes in some
         $structure = new Structure;
@@ -51,10 +47,8 @@ class StructureTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test invalid structure
-     *
-     * @return void
-     **/
-    public function testDirectoryFileMix()
+     */
+    public function testDirectoryFileMix(): void
     {
         $this->expectException(\Naneau\FileGen\Structure\Exception::class);
 
@@ -65,10 +59,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
             ->file('foo/baz', 'baz contents');
     }
 
-    /**
-     * @return void
-     **/
-    public function testParameterDefinition()
+    public function testParameterDefinition(): void
     {
         // Note leading slashes in some
         $structure = new Structure;
@@ -89,13 +80,8 @@ class StructureTest extends \PHPUnit\Framework\TestCase
             File::class,
             $structure->scan('bar')
         );
-        self::assertInstanceOf(
-            Parameter::class,
-            $structure->getParameterDefinition()->get('foo')
-        );
-        self::assertInstanceOf(
-            Parameter::class,
-            $structure->getParameterDefinition()->get('bar')
-        );
+
+        $structure->getParameterDefinition()->get('foo');
+        $structure->getParameterDefinition()->get('bar');
     }
 }

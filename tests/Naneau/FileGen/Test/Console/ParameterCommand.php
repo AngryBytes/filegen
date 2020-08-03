@@ -17,43 +17,36 @@ class ParameterCommand extends Command
      * The structure
      *
      * @var Structure
-     **/
+     */
     private $structure;
 
     /**
      * the receive params
      *
-     * @var array
-     **/
-    private $received = array();
+     * @var string[]
+     */
+    private $received = [];
 
     /**
      * Configure the command
-     *
-     * @return void
-     **/
-    protected function configure()
+     */
+    protected function configure(): void
     {
         $this->setName('filegen:test:filegen-parameters');
     }
 
     /**
      * Get the structure
-     *
-     * @return Structure
      */
-    public function getStructure()
+    public function getStructure(): Structure
     {
         return $this->structure;
     }
 
     /**
      * The structure
-     *
-     * @param  Structure        $structure
-     * @return ParameterCommand
      */
-    public function setStructure(Structure $structure)
+    public function setStructure(Structure $structure): self
     {
         $this->structure = $structure;
 
@@ -63,9 +56,9 @@ class ParameterCommand extends Command
     /**
      * Get the received parameters
      *
-     * @return array
+     * @return string[]
      */
-    public function getReceived()
+    public function getReceived(): array
     {
         return $this->received;
     }
@@ -73,10 +66,9 @@ class ParameterCommand extends Command
     /**
      * Set the received parameters
      *
-     * @param array $received
-     * @return ParameterCommand
+     * @param string[] $received
      */
-    public function setReceived(array $received)
+    public function setReceived(array $received): self
     {
         $this->received = $received;
 
@@ -85,12 +77,8 @@ class ParameterCommand extends Command
 
     /**
      * Execute the command
-     *
-     * @param  InputInterface  $input
-     * @param  OutputInterface $output
-     * @return void
-     **/
-    protected function execute(InputInterface $input, OutputInterface $output)
+     */
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $received = $this->getHelper('filegenParameters')->askParameters(
             $this->getStructure(),
@@ -99,5 +87,7 @@ class ParameterCommand extends Command
         );
 
         $this->setReceived($received);
+
+        return 0;
     }
 }

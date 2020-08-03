@@ -15,18 +15,15 @@ class File extends AccessRights
      * Contents of the file
      *
      * @var ContentGenerator
-     **/
+     */
     private $contentGenerator;
 
     /**
      * Constructor
      *
-     * @param  string                  $name
-     * @param  ContentGenerator|string $contents
-     * @param  int                     $mode     mode in octal 0XXX
-     * @return void
-     **/
-    public function __construct($name, $contents = '', $mode = null)
+     * @param ContentGenerator|string $contents
+     */
+    public function __construct(string $name, $contents = '', int $mode = 0666)
     {
         parent::__construct($name, $mode);
 
@@ -36,10 +33,9 @@ class File extends AccessRights
     /**
      * Get the contents as a string
      *
-     * @param  array[string]string $parameters
-     * @return string
-     **/
-    public function getContents(array $parameters = array())
+     * @param string[] $parameters
+     */
+    public function getContents(array $parameters = []): string
     {
         // Merge incoming parameters with that of the content generator if the
         // content generator is parameterized
@@ -55,10 +51,8 @@ class File extends AccessRights
 
     /**
      * Get the content generator
-     *
-     * @return ContentGenerator
      */
-    public function getContentGenerator()
+    public function getContentGenerator(): ContentGenerator
     {
         return $this->contentGenerator;
     }
@@ -66,10 +60,9 @@ class File extends AccessRights
     /**
      * Set the content generator
      *
-     * @param  ContentGenerator $contentGenerator
-     * @return File
+     * @param  ContentGenerator|string $contentGenerator
      */
-    public function setContentGenerator($contentGenerator)
+    public function setContentGenerator($contentGenerator): self
     {
         if (is_string($contentGenerator)) {
             $this->contentGenerator = new StringContents($contentGenerator);

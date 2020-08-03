@@ -10,10 +10,8 @@ class SymLinkTest extends \Naneau\FileGen\Test\Generator\TestCase
 {
     /**
      * Test simple creation
-     *
-     * @return void
-     **/
-    public function testCreation()
+     */
+    public function testCreation(): void
     {
         $generator = $this->createGenerator();
 

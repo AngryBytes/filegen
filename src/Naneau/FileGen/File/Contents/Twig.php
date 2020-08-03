@@ -15,24 +15,22 @@ class Twig implements FileContents, Parameterized
      * The twig template
      *
      * @var TwigTemplate
-     **/
+     */
     private $template;
 
     /**
      * The parameters
      *
-     * @var array[string]string
-     **/
+     * @var string[]
+     */
     private $parameters;
 
     /**
      * Constructor
      *
-     * @param  TwigTemplate $template
-     * @param  array        $parameters
-     * @return void
-     **/
-    public function __construct(TwigTemplate $template, array $parameters = array())
+     * @param  string[] $parameters
+     */
+    public function __construct(TwigTemplate $template, array $parameters = [])
     {
         $this
             ->setTemplate($template)
@@ -41,31 +39,24 @@ class Twig implements FileContents, Parameterized
 
     /**
      * Get the contents
-     *
-     * @return string
-     **/
-    public function getContents()
+     */
+    public function getContents(): string
     {
         return $this->getTemplate()->render($this->getParameters());
     }
 
     /**
      * Get the template
-     *
-     * @return TwigTemplate
      */
-    public function getTemplate()
+    public function getTemplate(): TwigTemplate
     {
         return $this->template;
     }
 
     /**
      * Set the template
-     *
-     * @param  TwigTemplate $template
-     * @return Twig
      */
-    public function setTemplate(TwigTemplate $template)
+    public function setTemplate(TwigTemplate $template): self
     {
         $this->template = $template;
 
@@ -75,9 +66,9 @@ class Twig implements FileContents, Parameterized
     /**
      * Get the parameters
      *
-     * @return array[string]string
+     * @return string[]
      */
-    public function getParameters()
+    public function getParameters(): array
     {
         return $this->parameters;
     }
@@ -85,10 +76,9 @@ class Twig implements FileContents, Parameterized
     /**
      * Set the parameters
      *
-     * @param  array[string]string $parameters
-     * @return Twig
+     * @param string[] $parameters
      */
-    public function setParameters(array $parameters)
+    public function setParameters(array $parameters): Parameterized
     {
         $this->parameters = $parameters;
 

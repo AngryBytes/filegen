@@ -10,17 +10,10 @@ class SymLink extends Node
      * The endpoint of the link
      *
      * @var string
-     **/
+     */
     private $endpoint;
 
-    /**
-     * Constructor
-     *
-     * @param  string $from endpoint (what the link points to)
-     * @param  string $to   used as $name for Node
-     * @return void
-     **/
-    public function __construct($from, $to)
+    public function __construct(string $from, string $to)
     {
         parent::__construct($to);
 
@@ -29,21 +22,16 @@ class SymLink extends Node
 
     /**
      * Get the endpoint of the link
-     *
-     * @return string
      */
-    public function getEndpoint()
+    public function getEndpoint(): string
     {
         return $this->endpoint;
     }
 
     /**
      * Set the endpoint of the link
-     *
-     * @param  string  $endpoint
-     * @return SymLink
      */
-    public function setEndpoint($endpoint)
+    public function setEndpoint(string $endpoint): self
     {
         $this->endpoint = $endpoint;
 

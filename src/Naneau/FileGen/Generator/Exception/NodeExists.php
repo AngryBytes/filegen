@@ -6,4 +6,6 @@ use Naneau\FileGen\Generator\Exception as GeneratorException;
 /**
  * Node already exists
  */
-class NodeExists extends GeneratorException {}
+class NodeExists extends GeneratorException
+{
+}

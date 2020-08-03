@@ -7,6 +7,8 @@ use \Iterator;
 
 /**
  * A directory, that can contain children (other directories, files, symlinks)
+ *
+ * @phpstan-implements Iterator<Node>
  */
 class Directory extends AccessRights implements Iterator
 {
@@ -14,15 +16,20 @@ class Directory extends AccessRights implements Iterator
      * Position of the iteration
      *
      * @var int
-     **/
+     */
     private $position = 0;
 
     /**
      * Child nodes
      *
      * @var Node[]
-     **/
-    private $children = array();
+     */
+    private $children = [];
+
+    public function __construct(string $name, int $mode = 0777)
+    {
+        parent::__construct($name, $mode);
+    }
 
     /**
      * Scan the child nodes for a path
@@ -33,10 +40,9 @@ class Directory extends AccessRights implements Iterator
      *
      * Will return either the found child node, or boolean false
      *
-     * @param  string    $path
      * @return Node|bool
-     **/
-    public function scan($path)
+     */
+    public function scan(string $path)
     {
         // Start scanning at the root (this dir)
         $node = $this;
@@ -75,9 +81,8 @@ class Directory extends AccessRights implements Iterator
      * Set the child nodes
      *
      * @param  Node[]    $children
-     * @return Directory
      */
-    public function setChildren(array $children)
+    public function setChildren(array $children): self
     {
         $this->children = $children;
 
@@ -86,11 +91,8 @@ class Directory extends AccessRights implements Iterator
 
     /**
      * Add a child
-     *
-     * @param  Node      $child
-     * @return Directory
-     **/
-    public function addChild(Node $child)
+     */
+    public function addChild(Node $child): self
     {
         $child->setParent($this);
 
@@ -101,11 +103,8 @@ class Directory extends AccessRights implements Iterator
 
     /**
      * Does a child with name $name exist?
-     *
-     * @param  string $name
-     * @return bool
-     **/
-    public function hasChild($name)
+     */
+    public function hasChild(string $name): bool
     {
         foreach ($this as $node) {
             if ($node->getName() === $name) {
@@ -118,11 +117,8 @@ class Directory extends AccessRights implements Iterator
 
     /**
      * Get a child with name $name
-     *
-     * @param  string $name
-     * @return Node
-     **/
-    public function getChild($name)
+     */
+    public function getChild(string $name): Node
     {
         foreach ($this as $node) {
             if ($node->getName() === $name) {
@@ -138,50 +134,40 @@ class Directory extends AccessRights implements Iterator
 
     /**
      * Rewind iterator
-     *
-     * @return void
-     **/
-    public function rewind()
+     */
+    public function rewind(): void
     {
         $this->position = 0;
     }
 
     /**
      * Get current node
-     *
-     * @return Node
-     **/
-    public function current()
+     */
+    public function current(): Node
     {
         return $this->children[$this->position];
     }
 
     /**
      * Get current key
-     *
-     * @return int
-     **/
-    public function key()
+     */
+    public function key(): int
     {
         return $this->position;
     }
 
     /**
      * Go to next position
-     *
-     * @return void
-     **/
-    public function next()
+     */
+    public function next(): void
     {
         ++$this->position;
     }
 
     /**
      * Is the iterator in a valid position?
-     *
-     * @return bool
-     **/
-    public function valid()
+     */
+    public function valid(): bool
     {
         return isset($this->children[$this->position]);
     }
