@@ -43,6 +43,11 @@ class StructureTest extends \PHPUnit\Framework\TestCase
             SymLink::class,
             $structure->scan('to/that')
         );
+
+        self::assertEquals(
+            null,
+            $structure->scan('path/to/nowhere')
+        );
     }
 
     /**
