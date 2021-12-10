@@ -4,7 +4,7 @@ namespace Naneau\FileGen;
 use Naneau\FileGen\File\Contents as ContentGenerator;
 use Naneau\FileGen\File\Contents\StringBased as StringContents;
 
-use \InvalidArgumentException;
+use InvalidArgumentException;
 
 /**
  * A file
@@ -13,10 +13,8 @@ class File extends AccessRights
 {
     /**
      * Contents of the file
-     *
-     * @var ContentGenerator
      */
-    private $contentGenerator;
+    private ContentGenerator $contentGenerator;
 
     /**
      * Constructor
@@ -61,6 +59,8 @@ class File extends AccessRights
      * Set the content generator
      *
      * @param  ContentGenerator|string $contentGenerator
+	 *
+	 * @throws InvalidArgumentException If the content generator is of the wrong type.
      */
     public function setContentGenerator($contentGenerator): self
     {

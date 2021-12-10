@@ -10,10 +10,8 @@ class StringBased implements Contents
 {
     /**
      * Contents of the file
-     *
-     * @var string
      */
-    private $contents;
+    private string $contents;
 
     public function __construct(string $contents)
     {

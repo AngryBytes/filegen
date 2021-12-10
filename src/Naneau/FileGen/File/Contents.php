@@ -8,8 +8,6 @@ interface Contents
 {
     /**
      * Get the contents for a file
-     *
-     * @return string
-     **/
-    public function getContents();
+     */
+    public function getContents(): string;
 }

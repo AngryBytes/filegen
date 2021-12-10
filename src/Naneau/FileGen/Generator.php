@@ -16,24 +16,20 @@ class Generator implements Parameterized
 {
     /**
      * Root of the generation
-     *
-     * @var string
      */
-    private $root;
+    private string $root;
 
     /**
      * The parameters
      *
      * @var string[]
      */
-    private $parameters;
+    private array $parameters;
 
     /**
      * The symfony filesystem
-     *
-     * @var Filesystem
      */
-    private $fileSystem;
+    private Filesystem $fileSystem;
 
     /**
      * Constructor
@@ -119,11 +115,12 @@ class Generator implements Parameterized
         return $this;
     }
 
-    /**
-     * Create a node
-     *
-     * @param Node $node
-     */
+	/**
+	 * Create a node
+	 *
+	 * @throws NodeExistsException 		If the node already exists.
+	 * @throws InvalidArgumentException If the node type is invalid.
+	 */
     private function createNode(Node $node): void
     {
         // See if it exists
@@ -149,9 +146,11 @@ class Generator implements Parameterized
         }
     }
 
-    /**
-     * Create a file
-     */
+	/**
+	 * Create a file
+	 *
+	 * @throws GeneratorException If the file could not be created.
+	 */
     private function createFile(File $file): self
     {
         // Full path to the file
@@ -179,9 +178,11 @@ class Generator implements Parameterized
         return $this;
     }
 
-    /**
-     * Create a directory
-     */
+	/**
+	 * Create a directory
+	 *
+	 * @throws GeneratorException If the directory could not be created.
+	 */
     private function createDirectory(Directory $directory): self
     {
         $fullPath = $this->getNodePath($directory);
@@ -212,9 +213,11 @@ class Generator implements Parameterized
         return $this;
     }
 
-    /**
-     * Create a symlink
-     */
+	/**
+	 * Create a symlink
+	 *
+	 * @throws GeneratorException If the symlink could not be created.
+	 */
     private function createLink(SymLink $link): self
     {
         $fullToPath = $this->getNodePath($link);

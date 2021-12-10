@@ -8,17 +8,13 @@ class Parameter
 {
     /**
      * Name of the parameter
-     *
-     * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * Human readable description
-     *
-     * @var string
      */
-    private $description;
+    private string $description;
 
     /**
      * The default value
@@ -32,10 +28,8 @@ class Parameter
      *
      * This is checked outside of the $defaultValue property, as `null` is a
      * valid default value
-     *
-     * @var bool
      */
-    private $hasDefaultValue = false;
+    private bool $hasDefaultValue = false;
 
     /**
      * Constructor

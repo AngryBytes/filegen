@@ -11,7 +11,7 @@ interface Parameterized
      *
      * @return string[]
      */
-    public function getParameters();
+    public function getParameters(): array;
 
     /**
      * Set the parameters

@@ -8,10 +8,8 @@ abstract class AccessRights extends Node
 {
     /**
      * The mode
-     *
-     * @var int
      */
-    private $mode;
+    private int $mode;
 
     public function __construct(string $name, int $mode)
     {

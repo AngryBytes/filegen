@@ -14,10 +14,8 @@ class Structure extends Directory
 {
     /**
      * The parameter definition
-     *
-     * @var ParameterSet
      */
-    private $parameterDefinition;
+    private ParameterSet $parameterDefinition;
 
     /**
      * Constructor

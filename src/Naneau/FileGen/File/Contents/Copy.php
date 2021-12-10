@@ -11,19 +11,19 @@ class Copy implements Contents
 {
     /**
      * The source file
-     *
-     * @var string
      */
-    private $from;
+    private string $from;
 
     public function __construct(string $from)
     {
         $this->setFrom($from);
     }
 
-    /**
-     * Get the contents
-     */
+	/**
+	 * Get the contents
+	 *
+	 * @throws Exception If the contents can't be read.
+	 */
     public function getContents(): string
     {
         // Make sure file exists

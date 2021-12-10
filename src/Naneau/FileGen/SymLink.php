@@ -8,10 +8,8 @@ class SymLink extends Node
 {
     /**
      * The endpoint of the link
-     *
-     * @var string
      */
-    private $endpoint;
+    private string $endpoint;
 
     public function __construct(string $from, string $to)
     {
