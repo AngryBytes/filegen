@@ -3,7 +3,7 @@ namespace Naneau\FileGen\Parameter;
 
 use Naneau\FileGen\Exception as FileGenException;
 
-use \Iterator;
+use Iterator;
 
 /**
  * A set of parameters
@@ -14,17 +14,15 @@ class Set implements Iterator
 {
     /**
      * Position of the iteration
-     *
-     * @var int
      */
-    private $position = 0;
+    private int $position = 0;
 
     /**
      * Parameters
      *
      * @var Parameter[]
      */
-    private $parameters = [];
+    private array $parameters = [];
 
     /**
      * Add a new parameter
@@ -52,6 +50,8 @@ class Set implements Iterator
 
     /**
      * Get a parameter by name
+     *
+     * @throws FileGenException If the parameter can't be found.
      */
     public function get(string $name): Parameter
     {
@@ -85,8 +85,6 @@ class Set implements Iterator
 
     /**
      * Get current key
-     *
-     * @return int
      */
     public function key(): int
     {

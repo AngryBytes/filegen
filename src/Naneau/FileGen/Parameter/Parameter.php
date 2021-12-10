@@ -8,22 +8,18 @@ class Parameter
 {
     /**
      * Name of the parameter
-     *
-     * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * Human readable description
-     *
-     * @var string
      */
-    private $description;
+    private string $description;
 
     /**
      * The default value
      *
-     * @var mixed
+     * @var bool|float|int|string|null
      */
     private $defaultValue;
 
@@ -32,10 +28,8 @@ class Parameter
      *
      * This is checked outside of the $defaultValue property, as `null` is a
      * valid default value
-     *
-     * @var bool
      */
-    private $hasDefaultValue = false;
+    private bool $hasDefaultValue = false;
 
     /**
      * Constructor
@@ -87,7 +81,7 @@ class Parameter
     /**
      * Get the default value
      *
-     * @return mixed
+     * @return bool|float|int|string|null
      */
     public function getDefaultValue()
     {
@@ -97,7 +91,7 @@ class Parameter
     /**
      * Set the default value
      *
-     * @param mixed $defaultValue
+     * @param bool|float|int|string|null $defaultValue
      */
     public function setDefaultValue($defaultValue): self
     {

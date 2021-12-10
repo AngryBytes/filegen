@@ -8,17 +8,13 @@ class Node
 {
     /**
      * Name of the node
-     *
-     * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * Parent node
-     *
-     * @var Node
      */
-    private $parent;
+    private Node $parent;
 
     public function __construct(string $name)
     {

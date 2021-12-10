@@ -15,8 +15,12 @@ class SetTest extends \PHPUnit\Framework\TestCase
             ->add('foo', 'bar')
             ->add('baz', 'qux');
 
-        $set->get('foo');
-        $set->get('baz');
+
+        $foo = $set->get('foo');
+        $this->assertEquals('bar', $foo->getDescription());
+
+        $baz = $set->get('baz');
+        $this->assertEquals('qux', $baz->getDescription());
     }
 
     /**

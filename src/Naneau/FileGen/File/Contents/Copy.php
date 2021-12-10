@@ -11,18 +11,13 @@ class Copy implements Contents
 {
     /**
      * The source file
-     *
-     * @var string
      */
-    private $from;
-
-    public function __construct(string $from)
-    {
-        $this->setFrom($from);
-    }
+    private string $from;
 
     /**
      * Get the contents
+     *
+     * @throws Exception If the contents can't be read.
      */
     public function getContents(): string
     {
@@ -44,6 +39,11 @@ class Copy implements Contents
         }
 
         return $contents;
+    }
+
+    public function __construct(string $from)
+    {
+        $this->setFrom($from);
     }
 
     /**

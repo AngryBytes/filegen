@@ -16,24 +16,20 @@ class Generator implements Parameterized
 {
     /**
      * Root of the generation
-     *
-     * @var string
      */
-    private $root;
+    private string $root;
 
     /**
      * The parameters
      *
      * @var string[]
      */
-    private $parameters;
+    private array $parameters;
 
     /**
      * The symfony filesystem
-     *
-     * @var Filesystem
      */
-    private $fileSystem;
+    private Filesystem $fileSystem;
 
     /**
      * Constructor
@@ -122,7 +118,8 @@ class Generator implements Parameterized
     /**
      * Create a node
      *
-     * @param Node $node
+     * @throws NodeExistsException      If the node already exists.
+     * @throws InvalidArgumentException If the node type is invalid.
      */
     private function createNode(Node $node): void
     {
@@ -151,6 +148,8 @@ class Generator implements Parameterized
 
     /**
      * Create a file
+     *
+     * @throws GeneratorException If the file could not be created.
      */
     private function createFile(File $file): self
     {
@@ -163,7 +162,9 @@ class Generator implements Parameterized
         try {
             $this->getFilesystem()->dumpFile($fullPath, $contents);
             if ($file->hasMode()) {
-                $this->getFilesystem()->chmod($fullPath, $file->getMode());
+                $mode = $file->getMode();
+                assert(is_int($mode));
+                $this->getFilesystem()->chmod($fullPath, $mode);
             }
         } catch (FilesystemIOException $filesystemException) {
             throw new GeneratorException(
@@ -181,6 +182,8 @@ class Generator implements Parameterized
 
     /**
      * Create a directory
+     *
+     * @throws GeneratorException If the directory could not be created.
      */
     private function createDirectory(Directory $directory): self
     {
@@ -189,7 +192,9 @@ class Generator implements Parameterized
         // Try to make it
         try {
             if ($directory->hasMode()) {
-                $this->getFilesystem()->mkdir($fullPath, $directory->getMode());
+                $mode = $directory->getMode();
+                assert(is_int($mode));
+                $this->getFilesystem()->mkdir($fullPath, $mode);
             } else {
                 $this->getFilesystem()->mkdir($fullPath);
             }
@@ -214,6 +219,8 @@ class Generator implements Parameterized
 
     /**
      * Create a symlink
+     *
+     * @throws GeneratorException If the symlink could not be created.
      */
     private function createLink(SymLink $link): self
     {

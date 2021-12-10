@@ -1,11 +1,31 @@
 # Changelog
 
+## 0.3.0
+
+### PHP support
+
+- Dropped support for PHP `7.3`.
+- Added support for PHP `8.1`.
+
+### 3rd party updates
+
+- Updated `symfony/filesystem` to version `5`.
+
+### Breaking changes
+
+- The `Naneau\FileGen\Directory::scan(string $path)` method now returns `null`
+  instead of `false`, if no child node is found.
+
 ## 0.2.0
 
 ### PHP support
 
 - Dropped support for PHP `7.2`.
 - Added support for PHP `8.0`.
+
+### 3rd party updates
+
+- Updated `symfony/filesystem` to version `4`.
 
 ## 0.1.0
 

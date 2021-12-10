@@ -19,10 +19,8 @@ class ParameterHelper implements HelperInterface
 {
     /**
      * The helperset
-     *
-     * @var HelperSet|null
      */
-    private $helperSet;
+    private ?HelperSet $helperSet;
 
     /**
      * Ask for a parameter's value
@@ -53,13 +51,14 @@ class ParameterHelper implements HelperInterface
             $question = new Question($parameter->getDescription());
         }
 
-        return $this->getQuestionHelper()->ask($input, $output, $question);
+        $answer = $this->getQuestionHelper()->ask($input, $output, $question);
+        assert(is_string($answer));
+
+        return $answer;
     }
 
     /**
      * Sets the helper set associated with this helper.
-     *
-     * @param HelperSet $helperSet A HelperSet instance
      */
     public function setHelperSet(HelperSet $helperSet = null): void
     {

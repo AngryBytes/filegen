@@ -13,17 +13,15 @@ class Twig implements FileContents, Parameterized
 {
     /**
      * The twig template
-     *
-     * @var TwigTemplate
      */
-    private $template;
+    private TwigTemplate $template;
 
     /**
      * The parameters
      *
      * @var string[]
      */
-    private $parameters;
+    private array $parameters;
 
     /**
      * Constructor
