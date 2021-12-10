@@ -9,9 +9,9 @@ abstract class AccessRights extends Node
     /**
      * The mode
      */
-    private int $mode;
+    private ?int $mode;
 
-    public function __construct(string $name, int $mode)
+    public function __construct(string $name, ?int $mode = null)
     {
         parent::__construct($name);
 
@@ -21,7 +21,7 @@ abstract class AccessRights extends Node
     /**
      * Get the mode (as an int)
      */
-    public function getMode(): int
+    public function getMode(): ?int
     {
         return $this->mode;
     }

@@ -19,7 +19,7 @@ class Parameter
     /**
      * The default value
      *
-     * @var mixed
+     * @var bool|float|int|string|null
      */
     private $defaultValue;
 
@@ -81,7 +81,7 @@ class Parameter
     /**
      * Get the default value
      *
-     * @return mixed
+     * @return bool|float|int|string|null
      */
     public function getDefaultValue()
     {
@@ -91,7 +91,7 @@ class Parameter
     /**
      * Set the default value
      *
-     * @param mixed $defaultValue
+     * @param bool|float|int|string|null $defaultValue
      */
     public function setDefaultValue($defaultValue): self
     {

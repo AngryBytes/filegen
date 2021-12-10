@@ -59,8 +59,8 @@ class File extends AccessRights
      * Set the content generator
      *
      * @param  ContentGenerator|string $contentGenerator
-	 *
-	 * @throws InvalidArgumentException If the content generator is of the wrong type.
+     *
+     * @throws InvalidArgumentException If the content generator is of the wrong type.
      */
     public function setContentGenerator($contentGenerator): self
     {

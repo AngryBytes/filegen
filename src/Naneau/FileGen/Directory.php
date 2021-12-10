@@ -111,11 +111,11 @@ class Directory extends AccessRights implements Iterator
         return false;
     }
 
-	/**
-	 * Get a child with name $name
-	 *
-	 * @throws Exception If the node was not found.
-	 */
+    /**
+     * Get a child with name $name
+     *
+     * @throws Exception If the node was not found.
+     */
     public function getChild(string $name): Node
     {
         foreach ($this as $node) {

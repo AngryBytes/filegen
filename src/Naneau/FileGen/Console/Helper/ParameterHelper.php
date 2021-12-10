@@ -51,7 +51,10 @@ class ParameterHelper implements HelperInterface
             $question = new Question($parameter->getDescription());
         }
 
-        return $this->getQuestionHelper()->ask($input, $output, $question);
+        $answer = $this->getQuestionHelper()->ask($input, $output, $question);
+        assert(is_string($answer));
+
+        return $answer;
     }
 
     /**
