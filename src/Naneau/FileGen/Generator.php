@@ -162,7 +162,9 @@ class Generator implements Parameterized
         try {
             $this->getFilesystem()->dumpFile($fullPath, $contents);
             if ($file->hasMode()) {
-                $this->getFilesystem()->chmod($fullPath, $file->getMode());
+                $mode = $file->getMode();
+                assert(is_int($mode));
+                $this->getFilesystem()->chmod($fullPath, $mode);
             }
         } catch (FilesystemIOException $filesystemException) {
             throw new GeneratorException(
@@ -190,7 +192,9 @@ class Generator implements Parameterized
         // Try to make it
         try {
             if ($directory->hasMode()) {
-                $this->getFilesystem()->mkdir($fullPath, $directory->getMode());
+                $mode = $directory->getMode();
+                assert(is_int($mode));
+                $this->getFilesystem()->mkdir($fullPath, $mode);
             } else {
                 $this->getFilesystem()->mkdir($fullPath);
             }

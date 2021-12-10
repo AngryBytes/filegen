@@ -29,7 +29,7 @@ abstract class AccessRights extends Node
     /**
      * Set the mode (as an int)
      */
-    public function setMode(int $mode): self
+    public function setMode(?int $mode): self
     {
         $this->mode = $mode;
 
