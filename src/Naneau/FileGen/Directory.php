@@ -36,11 +36,9 @@ class Directory extends AccessRights implements Iterator
      * exists, it has a child directory node `bar`, which should have a child
      * node `baz`
      *
-     * Will return either the found child node, or boolean false
-     *
-     * @return Node|bool
+     * Will return either the found child node, or null.
      */
-    public function scan(string $path)
+    public function scan(string $path): ?Node
     {
         // Start scanning at the root (this dir)
         $node = $this;
@@ -50,12 +48,12 @@ class Directory extends AccessRights implements Iterator
 
             // Can't find children if $node is not a directory
             if (!($node instanceof Directory)) {
-                return false;
+                return null;
             }
 
             // If the current node doesn't have the item, $path doesn't exist (fully)
             if (!$node->hasChild($item)) {
-                return false;
+                return null;
             }
 
             // New parent node

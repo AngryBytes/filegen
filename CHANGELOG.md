@@ -11,6 +11,11 @@
 
 - Updated `symfony/filesystem` to version `5`.
 
+### Breaking changes
+
+- The `Naneau\FileGen\Directory::scan(string $path)` method now returns `null`
+  instead of `false`, if no child node is found.
+
 ## 0.2.0
 
 ### PHP support
