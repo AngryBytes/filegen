@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0
+
+### PHP support
+
+- Dropped support for PHP `8.0` and lower.
+- Added support for PHP `8.3`.
+
 ## 0.3.1
 
 ### PHP support
