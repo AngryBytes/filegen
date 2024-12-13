@@ -1,4 +1,5 @@
 <?php
+
 namespace Naneau\FileGen\Structure;
 
 use Naneau\FileGen\Exception as FileGenException;

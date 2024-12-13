@@ -1,8 +1,8 @@
 <?php
+
 namespace Naneau\FileGen;
 
 use Naneau\FileGen\Exception as FileGenException;
-
 use Iterator;
 
 /**
@@ -24,7 +24,7 @@ class Directory extends AccessRights implements Iterator
      */
     private array $children = [];
 
-    public function __construct(string $name, int $mode = 0777)
+    public function __construct(string $name, int $mode = 0o777)
     {
         parent::__construct($name, $mode);
     }

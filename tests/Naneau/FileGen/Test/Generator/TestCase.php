@@ -1,11 +1,11 @@
 <?php
+
 namespace Naneau\FileGen\Test\Generator;
 
 use Naneau\FileGen\Generator;
-
-use \RecursiveDirectoryIterator;
-use \RecursiveIteratorIterator;
-use \FilesystemIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use FilesystemIterator;
 
 /**
  * Base class for tests, sets up virtual file system
@@ -89,6 +89,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
             RecursiveIteratorIterator::CHILD_FIRST
         );
 
+        /** @var \SplFileInfo $file */
         foreach ($iterator as $file) {
             if ($file->isFile() || $file->isLink()) {
                 unlink($file);

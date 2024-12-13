@@ -1,4 +1,5 @@
 <?php
+
 namespace Naneau\FileGen\Test\Generator;
 
 use Naneau\FileGen\Structure;
@@ -13,11 +14,11 @@ class FileTest extends \Naneau\FileGen\Test\Generator\TestCase
      */
     public function testCreation(): void
     {
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
             ->file('foo', 'foo contents')
-            ->file('/bar', 'bar contents', 0700)
-            ->file('baz/bar', 'baz/bar contents', 0775);
+            ->file('/bar', 'bar contents', 0o700)
+            ->file('baz/bar', 'baz/bar contents', 0o775);
 
         $generator = $this->createGenerator();
         $generator->generate($structure);
@@ -54,7 +55,7 @@ class FileTest extends \Naneau\FileGen\Test\Generator\TestCase
     {
         $this->expectException(\Naneau\FileGen\Generator\Exception\NodeExists::class);
 
-        $structure = new Structure;
+        $structure = new Structure();
         $structure->file('foo', 'foo');
 
         $generator = $this->createGenerator();

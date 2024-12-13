@@ -1,4 +1,5 @@
 <?php
+
 namespace Naneau\FileGen\Test\Generator;
 
 use Naneau\FileGen\Structure;
@@ -15,7 +16,7 @@ class SymLinkTest extends \Naneau\FileGen\Test\Generator\TestCase
     {
         $generator = $this->createGenerator();
 
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
             ->file('foo', 'foo contents')
             ->link($generator->getRoot() . '/foo', 'bar');

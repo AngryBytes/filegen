@@ -1,4 +1,5 @@
 <?php
+
 namespace Naneau\FileGen\Test\Generator;
 
 use Naneau\FileGen\Structure;
@@ -13,7 +14,7 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
      */
     public function testCreation(): void
     {
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
             ->directory('foo')
             ->directory('bar');
@@ -31,10 +32,10 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
      */
     public function testPermissions(): void
     {
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
-            ->directory('foo', 0755)
-            ->directory('bar', 0700);
+            ->directory('foo', 0o755)
+            ->directory('bar', 0o700);
 
         $generator = $this->createGenerator();
         $generator->generate($structure);
@@ -58,7 +59,7 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
      */
     public function testNesting(): void
     {
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
             // Incremental
             ->directory('foo')
@@ -67,7 +68,7 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
 
             // At once
             ->directory('bar/baz/qux')
-            ;
+        ;
 
         $generator = $this->createGenerator();
         $generator->generate($structure);
@@ -85,22 +86,22 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
     public function testFile(): void
     {
         // Note leading/trailing slashes
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
             // Incremental
-            ->directory('foo/', 0755)
-            ->directory('/foo/bar', 0700)
+            ->directory('foo/', 0o755)
+            ->directory('/foo/bar', 0o700)
             ->directory('/foo/bar/baz/')
 
             // Files for each dir
-            ->file('foo/fileOne', 'file one', 0775)
-            ->file('foo/bar/fileTwo', 'file two', 0700)
+            ->file('foo/fileOne', 'file one', 0o775)
+            ->file('foo/bar/fileTwo', 'file two', 0o700)
             ->file('/foo/bar/baz/fileThree', 'file three')
 
             // At once
             ->directory('bar/baz/qux')
             ->file('bar/baz/qux/fileFour', 'file four')
-            ;
+        ;
 
         $generator = $this->createGenerator();
         $generator->generate($structure);
@@ -155,7 +156,7 @@ class DirectoryTest extends \Naneau\FileGen\Test\Generator\TestCase
     {
         $this->expectException(\Naneau\FileGen\Generator\Exception\NodeExists::class);
 
-        $structure = new Structure;
+        $structure = new Structure();
         $structure->directory('foo');
 
         $generator = $this->createGenerator();

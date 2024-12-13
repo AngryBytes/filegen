@@ -1,12 +1,10 @@
 <?php
+
 namespace Naneau\FileGen\Test\Console;
 
 use Naneau\FileGen\Console\Helper\ParameterHelper;
-
 use Naneau\FileGen\Structure;
-
 use Symfony\Component\Console\Application;
-
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
@@ -17,12 +15,12 @@ class ParameterHelperTest extends \PHPUnit\Framework\TestCase
     public function testExecute(): void
     {
         $application = new Application();
-        $application->getHelperSet()->set(new ParameterHelper, 'filegenParameters');
+        $application->getHelperSet()->set(new ParameterHelper(), 'filegenParameters');
 
-        $command = new ParameterCommand;
+        $command = new ParameterCommand();
         $application->add($command);
 
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
             ->parameter('foo', 'foo description')
             ->parameter('bar', 'bar description')
@@ -37,8 +35,8 @@ class ParameterHelperTest extends \PHPUnit\Framework\TestCase
         // Set the input stream
         $commandTester->setInputs(['FooValue', 'BarValue']);
 
-        $commandTester->execute(array(
-            'command' => $command->getName()));
+        $commandTester->execute([
+            'command' => $command->getName()]);
 
         self::assertEquals(
             'foo descriptionbar descriptionbaz description',

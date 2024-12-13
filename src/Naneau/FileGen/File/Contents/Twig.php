@@ -1,9 +1,9 @@
 <?php
+
 namespace Naneau\FileGen\File\Contents;
 
 use Naneau\FileGen\File\Contents as FileContents;
 use Naneau\FileGen\Parameterized;
-
 use Twig\TemplateWrapper as TwigTemplate;
 
 /**

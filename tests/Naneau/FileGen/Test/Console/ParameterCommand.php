@@ -1,8 +1,9 @@
 <?php
+
 namespace Naneau\FileGen\Test\Console;
 
+use Naneau\FileGen\Console\Helper\ParameterHelper;
 use Naneau\FileGen\Structure;
-
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -80,7 +81,10 @@ class ParameterCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $received = $this->getHelper('filegenParameters')->askParameters(
+        $helper = $this->getHelper('filegenParameters');
+        assert($helper instanceof ParameterHelper);
+
+        $received = $helper->askParameters(
             $this->getStructure(),
             $input,
             $output

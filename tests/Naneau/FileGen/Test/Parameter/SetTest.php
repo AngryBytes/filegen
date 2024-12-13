@@ -1,4 +1,5 @@
 <?php
+
 namespace Naneau\FileGen\Test\Parameter;
 
 use Naneau\FileGen\Parameter\Set as ParameterSet;
@@ -10,7 +11,7 @@ class SetTest extends \PHPUnit\Framework\TestCase
      */
     public function testGet(): void
     {
-        $set = new ParameterSet;
+        $set = new ParameterSet();
         $set
             ->add('foo', 'bar')
             ->add('baz', 'qux');
@@ -30,7 +31,7 @@ class SetTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(\Naneau\FileGen\Exception::class);
 
-        $set = new ParameterSet;
+        $set = new ParameterSet();
         $set->add('foo', 'bar');
 
         $set->get('baz');

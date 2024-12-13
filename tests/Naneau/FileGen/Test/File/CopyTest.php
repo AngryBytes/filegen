@@ -1,4 +1,5 @@
 <?php
+
 namespace Naneau\FileGen\Test\File;
 
 use Naneau\FileGen\File\Contents\Exception;
@@ -17,7 +18,7 @@ class CopyTest extends \Naneau\FileGen\Test\Generator\TestCase
     {
         $generator = $this->createGenerator();
 
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
             ->file('foo', 'foo contents')
             ->file(
@@ -47,7 +48,7 @@ class CopyTest extends \Naneau\FileGen\Test\Generator\TestCase
 
         $generator = $this->createGenerator();
 
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
             ->file('foo', 'foo contents')
             ->file(
@@ -69,9 +70,9 @@ class CopyTest extends \Naneau\FileGen\Test\Generator\TestCase
 
         // Create unreadable file
         touch($generator->getRoot() . '/not-readable');
-        chmod($generator->getRoot() . '/not-readable', 0000);
+        chmod($generator->getRoot() . '/not-readable', 0o000);
 
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
             ->file(
                 'bar',

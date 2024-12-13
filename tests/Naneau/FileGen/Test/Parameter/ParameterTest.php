@@ -1,4 +1,5 @@
 <?php
+
 namespace Naneau\FileGen\Test\Parameter;
 
 use Naneau\FileGen\Parameter\Parameter;

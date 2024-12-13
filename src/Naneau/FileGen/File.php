@@ -1,9 +1,9 @@
 <?php
+
 namespace Naneau\FileGen;
 
 use Naneau\FileGen\File\Contents as ContentGenerator;
 use Naneau\FileGen\File\Contents\StringBased as StringContents;
-
 use InvalidArgumentException;
 
 /**
@@ -21,7 +21,7 @@ class File extends AccessRights
      *
      * @param ContentGenerator|string $contents
      */
-    public function __construct(string $name, $contents = '', int $mode = 0666)
+    public function __construct(string $name, $contents = '', int $mode = 0o666)
     {
         parent::__construct($name, $mode);
 

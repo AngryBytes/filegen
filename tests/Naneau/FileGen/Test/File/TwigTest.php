@@ -1,9 +1,9 @@
 <?php
+
 namespace Naneau\FileGen\Test\File;
 
 use Naneau\FileGen\Structure;
 use Naneau\FileGen\File\Contents\Twig as TwigContents;
-
 use Twig\Loader\FilesystemLoader as TwigFileLoader;
 use Twig\Environment as TwigEnvironment;
 
@@ -19,7 +19,7 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
     {
         $generator = $this->createGenerator();
 
-        $structure = new Structure;
+        $structure = new Structure();
         $structure->file('foo', new TwigContents(
             $this->createTwig()->load('template_one.twig')
         ));
@@ -40,14 +40,14 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
     {
         $generator = $this->createGenerator();
 
-        $structure = new Structure;
+        $structure = new Structure();
         $structure->file('foo', new TwigContents(
             $this->createTwig()->load('template_two.twig'),
-            array(
+            [
                 'foo' => 'foo',
                 'bar' => 'bar',
-                'baz' => 'baz'
-            )
+                'baz' => 'baz',
+            ]
         ));
 
         $generator->generate($structure);
@@ -64,17 +64,17 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
      */
     public function testStructureParameters(): void
     {
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
             ->file('foo', new TwigContents(
                 $this->createTwig()->load('template_two.twig')
             ));
 
-        $generator = $this->createGenerator(array(
+        $generator = $this->createGenerator([
             'foo' => 'foo',
             'bar' => 'bar',
-            'baz' => 'baz'
-        ));
+            'baz' => 'baz',
+        ]);
         $generator->generate($structure);
 
         // See if structure was generated
@@ -91,13 +91,13 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
     {
         $generator = $this->createGenerator();
 
-        $structure = new Structure;
+        $structure = new Structure();
         $structure->file('foo', new TwigContents(
             $this->createTwig()->load('template_two.twig'),
-            array(
+            [
                 'foo' => 'foo',
-                'baz' => 'baz'
-            )
+                'baz' => 'baz',
+            ]
         ));
 
         $generator->generate($structure);
@@ -116,9 +116,9 @@ class TwigTest extends \Naneau\FileGen\Test\Generator\TestCase
     {
         return new TwigEnvironment(
             new TwigFileLoader($this->getTestsRoot() .  '/templates/'),
-            array(
-                'cache' => sys_get_temp_dir() . '/filegen-tests-twig-compile'
-            )
+            [
+                'cache' => sys_get_temp_dir() . '/filegen-tests-twig-compile',
+            ]
         );
     }
 }

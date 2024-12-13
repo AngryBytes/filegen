@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0
+
+### PHP support
+
+- Dropped support for PHP `8.1` and lower.
+- Added support for PHP `8.4`.
+- Compatible with Symfony 6 and 7.
+
 ## 0.4.0
 
 ### PHP support

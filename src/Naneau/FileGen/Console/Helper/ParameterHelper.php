@@ -1,13 +1,12 @@
 <?php
+
 namespace Naneau\FileGen\Console\Helper;
 
 use Naneau\FileGen\Structure;
 use Naneau\FileGen\Parameter\Parameter;
-
 use Symfony\Component\Console\Helper\HelperInterface;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\QuestionHelper;
-
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
@@ -60,7 +59,7 @@ class ParameterHelper implements HelperInterface
     /**
      * Sets the helper set associated with this helper.
      */
-    public function setHelperSet(HelperSet $helperSet = null): void
+    public function setHelperSet(?HelperSet $helperSet = null): void
     {
         $this->helperSet = $helperSet;
     }

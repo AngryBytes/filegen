@@ -1,4 +1,5 @@
 <?php
+
 namespace Naneau\FileGen\Test\Structure;
 
 use Naneau\FileGen\Structure;
@@ -14,7 +15,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
     public function testStructure(): void
     {
         // Note leading slashes in some
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
             ->directory('foo')
             ->directory('/bar')
@@ -58,7 +59,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Naneau\FileGen\Structure\Exception::class);
 
         // Can't add file under a node that's a file already
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
             ->file('foo', 'bar contents')
             ->file('foo/baz', 'baz contents');
@@ -67,7 +68,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
     public function testParameterDefinition(): void
     {
         // Note leading slashes in some
-        $structure = new Structure;
+        $structure = new Structure();
         $structure
             // Throw in a file and directory
             ->directory('foo')

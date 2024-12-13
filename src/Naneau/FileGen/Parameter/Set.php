@@ -1,8 +1,8 @@
 <?php
+
 namespace Naneau\FileGen\Parameter;
 
 use Naneau\FileGen\Exception as FileGenException;
-
 use Iterator;
 
 /**

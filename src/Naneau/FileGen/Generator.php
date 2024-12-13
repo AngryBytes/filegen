@@ -1,13 +1,12 @@
 <?php
+
 namespace Naneau\FileGen;
 
 use Naneau\FileGen\Generator\Exception as GeneratorException;
 use Naneau\FileGen\Generator\Exception\NodeExists as NodeExistsException;
-
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOException as FilesystemIOException;
-
-use \InvalidArgumentException;
+use InvalidArgumentException;
 
 /**
  * The generator takes directory structures and actually creates them on disk
@@ -41,7 +40,7 @@ class Generator implements Parameterized
         $this
             ->setRoot($root)
             ->setParameters($parameters)
-            ->setFilesystem(new Filesystem);
+            ->setFilesystem(new Filesystem());
     }
 
     /**

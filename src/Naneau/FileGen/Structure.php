@@ -1,10 +1,9 @@
 <?php
+
 namespace Naneau\FileGen;
 
 use Naneau\FileGen\File\Contents as FileContents;
-
 use Naneau\FileGen\Parameter\Set as ParameterSet;
-
 use Naneau\FileGen\Structure\Exception as StructureException;
 
 /**
@@ -20,14 +19,14 @@ class Structure extends Directory
     /**
      * Constructor
      */
-    public function __construct(int $mode = 0666)
+    public function __construct(int $mode = 0o666)
     {
         // Although the root node (Structure) is a directory, it does not  have
         // a "name", relative to the root
         parent::__construct('', $mode);
 
         // Initialize the parameter definition
-        $this->setParameterDefinition(new ParameterSet);
+        $this->setParameterDefinition(new ParameterSet());
     }
 
     /**
@@ -35,7 +34,7 @@ class Structure extends Directory
      *
      * @param FileContents|string $contents
      */
-    public function file(string $name, $contents = '', int $mode = 0666): self
+    public function file(string $name, $contents = '', int $mode = 0o666): self
     {
         // Create the file itself
         $file = new File(basename($name), $contents, $mode);
@@ -51,7 +50,7 @@ class Structure extends Directory
     /**
      * Add a directory
      */
-    public function directory(string $name, int $mode = 0777): self
+    public function directory(string $name, int $mode = 0o777): self
     {
         // Create the file itself
         $directory = new Directory(basename($name), $mode);
@@ -83,7 +82,7 @@ class Structure extends Directory
     /**
      * Add a parameter
      */
-    public function parameter(string $name, string $description = null): self
+    public function parameter(string $name, ?string $description = null): self
     {
         $this->getParameterDefinition()->add($name, $description);
 
