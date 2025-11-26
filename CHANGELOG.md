@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.1
+
+### PHP support
+
+- Added support for PHP `8.5`.
+
 ## 0.5.0
 
 ### PHP support
