@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.2
+
+- Compatible with Symfony 6, 7 and 8.
+
 ## 0.5.1
 
 ### PHP support
